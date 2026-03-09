@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Modern developer portfolio with dark theme and blue-purple gradients."
+    />
+    <title>ELVIS88 Carter | Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <a href="#" class="brand">ELVIS88<span>.DEV</span></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+          <p class="kicker">FULL STACK DEVELOPER</p>
+          <h1>Building fast, scalable, and beautiful web apps.</h1>
+          <p class="subtitle">
+            I craft premium digital experiences with clean architecture, modern
+            frontend systems, and reliable backend services.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn ghost" href="#contact">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section container">
+        <h2>About</h2>
+        <p>
+          I am a developer focused on turning ideas into production-ready web
+          products. From UI implementation to API design and deployment, I
+          deliver complete solutions with performance and maintainability in
+          mind.
+        </p>
+      </section>
+
+      <section id="skills" class="section container">
+        <h2>Skills</h2>
+        <div class="grid cards">
+          <article class="card">
+            <h3>Frontend</h3>
+            <p>HTML, CSS, JavaScript, TypeScript, React, Next.js</p>
+          </article>
+          <article class="card">
+            <h3>Backend</h3>
+            <p>Node.js, Express, Laravel, Django</p>
+          </article>
+          <article class="card">
+            <h3>Database</h3>
+            <p>MongoDB, PostgreSQL, MySQL</p>
+          </article>
+          <article class="card">
+            <h3>Tools</h3>
+            <p>Git, Docker, Firebase, AWS, Vercel</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects" class="section container">
+        <h2>Projects</h2>
+        <div class="grid projects">
+          <article class="card project">
+            <h3>E-commerce Platform</h3>
+            <p>Full-stack online store with payments and analytics.</p>
+          </article>
+          <article class="card project">
+            <h3>SaaS Dashboard</h3>
+            <p>Modern dashboard with metrics, auth, and API integrations.</p>
+          </article>
+          <article class="card project">
+            <h3>Task Management App</h3>
+            <p>Collaborative productivity app with real-time features.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section container">
+        <h2>Contact</h2>
+        <form class="contact-form">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+          <textarea placeholder="Message" rows="5" required></textarea>
+          <button class="btn primary" type="submit">Send Message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© <span id="year"></span> Alex Carter. Built with modern web tech.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
