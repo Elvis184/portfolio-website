@@ -50,6 +50,7 @@ if (heroPhoto && photoFallback) {
   const tryNextImage = () => {
     if (currentIndex >= candidates.length) {
       heroPhoto.style.display = "none";
+      heroPhoto.hidden = true;
       photoFallback.hidden = false;
       return;
     }
@@ -60,6 +61,7 @@ if (heroPhoto && photoFallback) {
 
   heroPhoto.addEventListener("load", () => {
     heroPhoto.style.display = "block";
+    heroPhoto.hidden = false;
     photoFallback.hidden = true;
   });
 
