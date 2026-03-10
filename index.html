@@ -20,7 +20,16 @@
     <header class="header">
       <nav class="nav container">
         <a href="#" class="brand">ELVIS<span>.DEV</span></a>
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu">Menu</button>
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          Menu
+        </button>
         <ul class="nav-links" id="navLinks">
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
@@ -51,19 +60,17 @@
           <div class="hero-visual">
             <div class="photo-shell">
               <div class="photo-glow"></div>
-              <div class="code-chip">
-                <span>const developer = "Elvis Carter";</span>
-                <span>stack = ["React", "Next.js", "Node.js"];</span>
+              <div class="photo-fallback" id="photoFallback" aria-hidden="true">
+                <span>Portfolio portrait</span>
+                <strong>Add `profile-photo.png`</strong>
               </div>
               <img
                 class="hero-photo"
-                src="profile-photo.jpg"
+                id="heroPhoto"
+                src="profile-photo.png"
+                data-photo-candidates="profile-photo.png,profile-photo.jpg,profile-photo.jpeg,profile-photo.webp"
                 alt="Elvis Carter holding a camera"
               />
-              <div class="photo-badge">
-                <strong>Developer</strong>
-                <span>Startup-ready full stack builder</span>
-              </div>
             </div>
           </div>
         </div>
@@ -121,12 +128,13 @@
 
       <section id="contact" class="section container">
         <h2>Contact</h2>
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm">
           <input type="text" placeholder="Name" required />
           <input type="email" placeholder="Email" required />
           <textarea placeholder="Message" rows="5" required></textarea>
           <button class="btn primary" type="submit">Send Message</button>
         </form>
+        <p class="form-status" id="formStatus" aria-live="polite"></p>
       </section>
     </main>
 

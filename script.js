@@ -1,17 +1,80 @@
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 const year = document.getElementById("year");
+const heroPhoto = document.getElementById("heroPhoto");
+const photoFallback = document.getElementById("photoFallback");
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
 
 if (year) {
   year.textContent = new Date().getFullYear();
 }
 
 if (menuBtn && navLinks) {
+  const closeMenu = () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  };
+
   menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    const isOpen = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(isOpen));
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => navLinks.classList.remove("open"));
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!navLinks.contains(event.target) && !menuBtn.contains(event.target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 800) {
+      closeMenu();
+    }
+  });
+}
+
+if (heroPhoto && photoFallback) {
+  const candidates = (heroPhoto.dataset.photoCandidates || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  let currentIndex = 0;
+  photoFallback.hidden = true;
+
+  const tryNextImage = () => {
+    if (currentIndex >= candidates.length) {
+      heroPhoto.style.display = "none";
+      photoFallback.hidden = false;
+      return;
+    }
+
+    heroPhoto.src = candidates[currentIndex];
+    currentIndex += 1;
+  };
+
+  heroPhoto.addEventListener("load", () => {
+    heroPhoto.style.display = "block";
+    photoFallback.hidden = true;
+  });
+
+  heroPhoto.addEventListener("error", tryNextImage);
+
+  if (candidates.length > 0) {
+    tryNextImage();
+  } else {
+    photoFallback.hidden = false;
+  }
+}
+
+if (contactForm && formStatus) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    formStatus.textContent = "Thanks. Your message is ready to send.";
   });
 }
