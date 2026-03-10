@@ -3,6 +3,7 @@ const navLinks = document.getElementById("navLinks");
 const year = document.getElementById("year");
 const heroPhoto = document.getElementById("heroPhoto");
 const photoFallback = document.getElementById("photoFallback");
+const profileAvatar = document.getElementById("profileAvatar");
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
@@ -87,4 +88,28 @@ if (contactForm && formStatus) {
     event.preventDefault();
     formStatus.textContent = "Thanks. Your message is ready to send.";
   });
+}
+
+if (profileAvatar) {
+  const avatarCandidates = (profileAvatar.dataset.avatarCandidates || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  let avatarIndex = 0;
+
+  const tryNextAvatar = () => {
+    if (avatarIndex >= avatarCandidates.length) {
+      return;
+    }
+
+    profileAvatar.src = avatarCandidates[avatarIndex];
+    avatarIndex += 1;
+  };
+
+  profileAvatar.addEventListener("error", tryNextAvatar);
+
+  if (!(profileAvatar.complete && profileAvatar.naturalWidth > 0) && avatarCandidates.length > 0) {
+    tryNextAvatar();
+  }
 }

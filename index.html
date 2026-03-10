@@ -47,7 +47,9 @@
             <div class="profile-avatar-wrap">
               <img
                 class="profile-avatar"
+                id="profileAvatar"
                 src="images/profile-avatar.png"
+                data-avatar-candidates="images/profile-avatar.png,images/hero.png,images/hero-placeholder.svg"
                 alt="Elvis Carter profile portrait"
                 loading="eager"
                 decoding="async"
@@ -68,10 +70,7 @@
           <div class="hero-visual">
             <div class="photo-shell">
               <div class="photo-glow"></div>
-              <div class="photo-fallback" id="photoFallback" hidden>
-                <span>Portfolio portrait</span>
-                <strong>Add `images/hero.png`</strong>
-              </div>
+              <div class="photo-fallback" id="photoFallback" hidden></div>
               <img
                 class="hero-photo"
                 id="heroPhoto"
