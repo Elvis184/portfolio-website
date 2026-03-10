@@ -227,20 +227,27 @@ section[id] {
 .hero-visual {
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .photo-shell {
   position: relative;
-  aspect-ratio: 16 / 9;
-  width: 100%;
+  aspect-ratio: 5 / 6;
+  width: min(100%, 400px);
   min-height: 0;
   padding: 0;
-  border-radius: 28px;
+  border-radius: 38px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(246, 248, 253, 0.92)),
-    linear-gradient(135deg, rgba(59, 130, 246, 0.04), rgba(251, 191, 36, 0.05));
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(245, 247, 255, 0.5)),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(139, 92, 246, 0.04) 55%, rgba(251, 191, 36, 0.07));
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 24px 70px -42px rgba(76, 29, 149, 0.35),
+    0 18px 40px -30px rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(18px) saturate(1.15);
   overflow: hidden;
 }
 
@@ -248,32 +255,35 @@ section[id] {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0));
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255, 255, 255, 0.5), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0));
   pointer-events: none;
 }
 
 .photo-shell::after {
   content: "";
   position: absolute;
-  right: 8%;
-  bottom: 6%;
-  width: 44%;
+  right: 17%;
+  bottom: 5%;
+  width: 52%;
   height: 10%;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.16);
-  filter: blur(16px);
+  filter: blur(18px);
   pointer-events: none;
 }
 
 .photo-glow {
   position: absolute;
-  right: 6%;
-  top: 8%;
-  width: 42%;
+  inset: -10%;
+  width: auto;
   aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.16), rgba(59, 130, 246, 0.04) 70%);
-  filter: blur(30px);
+  background:
+    radial-gradient(circle at 72% 26%, rgba(59, 130, 246, 0.28), transparent 24%),
+    radial-gradient(circle at 42% 18%, rgba(139, 92, 246, 0.22), transparent 26%),
+    radial-gradient(circle at 34% 70%, rgba(251, 191, 36, 0.22), transparent 24%);
+  filter: blur(34px);
   pointer-events: none;
 }
 
@@ -284,10 +294,12 @@ section[id] {
   display: grid;
   align-content: center;
   justify-items: center;
-  border-radius: 28px;
+  border-radius: 38px;
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.7), rgba(236, 242, 255, 0.75)),
-    radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.08), transparent 30%);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.58), rgba(236, 242, 255, 0.72)),
+    radial-gradient(circle at 26% 22%, rgba(139, 92, 246, 0.08), transparent 28%),
+    radial-gradient(circle at 68% 18%, rgba(59, 130, 246, 0.1), transparent 24%),
+    radial-gradient(circle at 36% 72%, rgba(251, 191, 36, 0.11), transparent 24%);
   color: #64748b;
   text-align: center;
 }
@@ -299,17 +311,20 @@ section[id] {
 
 .hero-photo {
   position: absolute;
-  right: 2%;
+  right: 7%;
   bottom: 0;
   z-index: 1;
   display: block;
   width: auto;
-  max-width: 58%;
-  height: 96%;
+  max-width: 82%;
+  height: 92%;
   object-fit: contain;
   object-position: center bottom;
-  border-radius: 0;
-  filter: contrast(1.03) saturate(1.02) drop-shadow(0 24px 30px rgba(15, 23, 42, 0.14));
+  border-radius: 24px;
+  filter:
+    contrast(1.03)
+    saturate(1.04)
+    drop-shadow(0 24px 30px rgba(15, 23, 42, 0.16));
 }
 
 .btn {
@@ -465,13 +480,15 @@ section[id] {
   }
 
   .photo-shell {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 5 / 6;
+    width: min(100%, 340px);
+    margin-inline: auto;
   }
 
   .hero-photo {
-    right: 2%;
-    max-width: 68%;
-    height: 94%;
+    right: 7%;
+    max-width: 82%;
+    height: 90%;
   }
 
   .photo-fallback {
