@@ -67,7 +67,11 @@ if (heroPhoto && photoFallback) {
 
   heroPhoto.addEventListener("error", tryNextImage);
 
-  if (candidates.length > 0) {
+  if (heroPhoto.complete && heroPhoto.naturalWidth > 0) {
+    heroPhoto.style.display = "block";
+    heroPhoto.hidden = false;
+    photoFallback.hidden = true;
+  } else if (candidates.length > 0) {
     tryNextImage();
   } else {
     photoFallback.hidden = false;
