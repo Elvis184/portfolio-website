@@ -276,9 +276,10 @@ section[id] {
 
 .photo-glow {
   position: absolute;
-  inset: -10%;
-  width: auto;
-  aspect-ratio: 1;
+  left: -12%;
+  top: -12%;
+  width: 124%;
+  height: 124%;
   background:
     radial-gradient(circle at 72% 26%, rgba(59, 130, 246, 0.28), transparent 24%),
     radial-gradient(circle at 42% 18%, rgba(139, 92, 246, 0.22), transparent 26%),
@@ -461,10 +462,12 @@ section[id] {
     grid-template-columns: 1fr;
     gap: 2rem;
     min-height: auto;
+    justify-items: center;
   }
 
   .hero-copy {
     max-width: none;
+    width: 100%;
   }
 
   .hero::before {
