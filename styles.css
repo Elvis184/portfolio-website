@@ -123,14 +123,42 @@ body {
 .hero {
   position: relative;
   padding: 5.5rem 0 4.5rem;
+  overflow: hidden;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(47, 124, 255, 0.13), rgba(139, 92, 246, 0.13));
-  filter: blur(60px);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(47, 124, 255, 0.22), transparent 28%),
+    radial-gradient(circle at 86% 20%, rgba(139, 92, 246, 0.26), transparent 32%),
+    radial-gradient(circle at 70% 68%, rgba(47, 124, 255, 0.12), transparent 30%),
+    linear-gradient(120deg, rgba(47, 124, 255, 0.06), rgba(139, 92, 246, 0.08));
+  filter: blur(48px);
   z-index: -1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 92%);
+  pointer-events: none;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-copy {
+  max-width: 620px;
 }
 
 .kicker {
@@ -146,6 +174,13 @@ body {
   line-height: 1.1;
 }
 
+.hero-role {
+  margin: 0 0 1rem;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: #dbe4ff;
+}
+
 .subtitle {
   color: var(--muted);
   max-width: 720px;
@@ -157,6 +192,110 @@ body {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.photo-shell {
+  position: relative;
+  min-height: 580px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    rgba(10, 14, 28, 0.82);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 30px 90px -50px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(47, 124, 255, 0.12);
+  overflow: hidden;
+}
+
+.photo-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 24% 20%, rgba(47, 124, 255, 0.22), transparent 28%),
+    radial-gradient(circle at 80% 18%, rgba(139, 92, 246, 0.2), transparent 32%);
+  pointer-events: none;
+}
+
+.photo-shell::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(to top, rgba(5, 9, 19, 0.9), transparent);
+  pointer-events: none;
+}
+
+.photo-glow {
+  position: absolute;
+  right: -10%;
+  top: 8%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(47, 124, 255, 0.36), rgba(139, 92, 246, 0.05) 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.hero-photo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 548px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 24px;
+  filter: saturate(0.95) contrast(1.02) brightness(0.9);
+}
+
+.code-chip {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 2;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(7, 11, 23, 0.7);
+  color: #d6deff;
+  font-size: 0.8rem;
+  backdrop-filter: blur(10px);
+}
+
+.photo-badge {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  gap: 0.2rem;
+  min-width: 220px;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(7, 11, 23, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.photo-badge strong {
+  font-size: 0.95rem;
+}
+
+.photo-badge span {
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .btn {
@@ -273,5 +412,24 @@ body {
 
   .nav-links.open {
     display: flex;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .photo-shell {
+    min-height: 460px;
+  }
+
+  .hero-photo {
+    min-height: 430px;
+  }
+
+  .photo-badge {
+    right: 0.85rem;
+    bottom: 0.85rem;
+    min-width: unset;
   }
 }
