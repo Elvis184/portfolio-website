@@ -52,6 +52,7 @@ if (heroPhoto && photoFallback) {
       heroPhoto.style.display = "none";
       heroPhoto.hidden = true;
       photoFallback.hidden = false;
+      photoFallback.setAttribute("aria-hidden", "false");
       return;
     }
 
@@ -63,6 +64,7 @@ if (heroPhoto && photoFallback) {
     heroPhoto.style.display = "block";
     heroPhoto.hidden = false;
     photoFallback.hidden = true;
+    photoFallback.setAttribute("aria-hidden", "true");
   });
 
   heroPhoto.addEventListener("error", tryNextImage);
@@ -71,10 +73,12 @@ if (heroPhoto && photoFallback) {
     heroPhoto.style.display = "block";
     heroPhoto.hidden = false;
     photoFallback.hidden = true;
+    photoFallback.setAttribute("aria-hidden", "true");
   } else if (candidates.length > 0) {
     tryNextImage();
   } else {
     photoFallback.hidden = false;
+    photoFallback.setAttribute("aria-hidden", "false");
   }
 }
 
