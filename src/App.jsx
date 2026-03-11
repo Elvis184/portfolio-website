@@ -458,13 +458,13 @@ export default function App() {
               <div className="contact-details">
                 <div>
                   <span>Email</span>
-                  <a href="mailto:hello@elviscarter.dev">
-                    hello@elviscarter.dev
+                  <a href="mailto:machaelvice8@gmail.com">
+                    machaelvice8@gmail.com
                   </a>
                 </div>
                 <div>
                   <span>Phone</span>
-                  <a href="tel:+255700000000">+255 700 000 000</a>
+                  <a href="tel:0761354537">0761354537</a>
                 </div>
                 <div>
                   <span>Location</span>
