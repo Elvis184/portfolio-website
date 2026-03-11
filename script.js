@@ -2,10 +2,12 @@ const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 const year = document.getElementById("year");
 const heroPhoto = document.getElementById("heroPhoto");
-const photoFallback = document.getElementById("photoFallback");
 const profileAvatar = document.getElementById("profileAvatar");
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
+const skillRings = document.querySelectorAll(".skill-ring");
+const sectionLinks = document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("main section[id]");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -18,8 +20,8 @@ if (menuBtn && navLinks) {
   };
 
   menuBtn.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("open");
-    menuBtn.setAttribute("aria-expanded", String(isOpen));
+    const open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", String(open));
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
@@ -31,85 +33,89 @@ if (menuBtn && navLinks) {
       closeMenu();
     }
   });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 800) {
-      closeMenu();
-    }
-  });
 }
 
-if (heroPhoto && photoFallback) {
-  const candidates = (heroPhoto.dataset.photoCandidates || "")
+const attachFallbackLoader = (element, candidatesAttr) => {
+  if (!element) {
+    return;
+  }
+
+  const currentSrc = element.getAttribute("src");
+  const candidates = [currentSrc, ...(element.dataset[candidatesAttr] || "")
     .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean);
+    .map((item) => item.trim())
+    .filter(Boolean)]
+    .filter((item, index, items) => item && items.indexOf(item) === index);
 
-  let currentIndex = 0;
-  photoFallback.hidden = true;
+  let index = Math.max(candidates.indexOf(currentSrc), 0) + 1;
 
-  const tryNextImage = () => {
-    if (currentIndex >= candidates.length) {
-      heroPhoto.style.display = "none";
-      heroPhoto.hidden = true;
-      photoFallback.hidden = false;
-      photoFallback.setAttribute("aria-hidden", "false");
+  const loadNext = () => {
+    if (index >= candidates.length) {
+      element.removeEventListener("error", loadNext);
       return;
     }
 
-    heroPhoto.src = candidates[currentIndex];
-    currentIndex += 1;
+    element.src = candidates[index];
+    index += 1;
   };
 
-  heroPhoto.addEventListener("load", () => {
-    heroPhoto.style.display = "block";
-    heroPhoto.hidden = false;
-    photoFallback.hidden = true;
-    photoFallback.setAttribute("aria-hidden", "true");
-  });
+  element.addEventListener("error", loadNext);
 
-  heroPhoto.addEventListener("error", tryNextImage);
-
-  if (heroPhoto.complete && heroPhoto.naturalWidth > 0) {
-    heroPhoto.style.display = "block";
-    heroPhoto.hidden = false;
-    photoFallback.hidden = true;
-    photoFallback.setAttribute("aria-hidden", "true");
-  } else if (candidates.length > 0) {
-    tryNextImage();
-  } else {
-    photoFallback.hidden = false;
-    photoFallback.setAttribute("aria-hidden", "false");
+  if (!(element.complete && element.naturalWidth > 0) && index < candidates.length) {
+    loadNext();
   }
-}
+};
+
+attachFallbackLoader(heroPhoto, "photoCandidates");
+attachFallbackLoader(profileAvatar, "avatarCandidates");
 
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    formStatus.textContent = "Thanks. Your message is ready to send.";
+    formStatus.textContent =
+      "Message captured. Connect this form to email or Formspree for live delivery.";
   });
 }
 
-if (profileAvatar) {
-  const avatarCandidates = (profileAvatar.dataset.avatarCandidates || "")
-    .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean);
+if (skillRings.length > 0) {
+  const ringObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
 
-  let avatarIndex = 0;
+        const ring = entry.target;
+        const value = Number(ring.dataset.value || 0);
+        ring.style.setProperty("--value", value);
+        ringObserver.unobserve(ring);
+      });
+    },
+    { threshold: 0.35 }
+  );
 
-  const tryNextAvatar = () => {
-    if (avatarIndex >= avatarCandidates.length) {
-      return;
+  skillRings.forEach((ring) => ringObserver.observe(ring));
+}
+
+if (sections.length > 0 && sectionLinks.length > 0) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const activeId = `#${entry.target.id}`;
+        sectionLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === activeId);
+        });
+      });
+    },
+    {
+      threshold: 0.55,
+      rootMargin: "-20% 0px -30% 0px",
     }
+  );
 
-    profileAvatar.src = avatarCandidates[avatarIndex];
-    avatarIndex += 1;
-  };
-
-  profileAvatar.addEventListener("error", tryNextAvatar);
-
-  if (!(profileAvatar.complete && profileAvatar.naturalWidth > 0) && avatarCandidates.length > 0) {
-    tryNextAvatar();
-  }
+  sections.forEach((section) => sectionObserver.observe(section));
 }

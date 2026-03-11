@@ -1,75 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-  scroll-behavior: smooth;
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-  font-family: Inter, sans-serif;
-  background: #050814;
-  color: #ffffff;
 }
 
 * {
   box-sizing: border-box;
-}
-
-@layer components {
-  .section-wrap {
-    @apply mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8;
-  }
-
-  .card-base {
-    @apply rounded-2xl border border-white/15 bg-white/5 shadow-card backdrop-blur-xl;
-  }
-
-  .input-base {
-    @apply w-full rounded-xl border border-white/20 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-electric/60 focus:ring-2 focus:ring-electric/20;
-  }
-
-  .avatar-ring {
-    @apply h-16 w-16 rounded-full bg-gradient-to-br from-electric via-violet to-cyan p-[2px];
-  }
-}
-
-.theme-light .card-base {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 18px 60px -36px rgba(15, 23, 42, 0.35);
-}
-
-.theme-light .text-white,
-.theme-light .text-slate-200,
-.theme-light .text-slate-300 {
-  color: #0f172a !important;
-}
-
-.theme-light .text-electric {
-  color: #155eef !important;
-}
-
-.theme-light .border-white\/10,
-.theme-light .border-white\/15,
-.theme-light .border-white\/20,
-.theme-light .border-white\/25 {
-  border-color: rgba(15, 23, 42, 0.14) !important;
-}
-
-.theme-light .bg-white\/5,
-.theme-light .bg-black\/20,
-.theme-light .bg-black\/25 {
-  background-color: rgba(255, 255, 255, 0.82) !important;
-}
-
-.theme-light .input-base {
-  background: rgba(255, 255, 255, 0.95);
-  color: #0f172a;
-}
-
-.theme-light header {
-  background: transparent;
 }
