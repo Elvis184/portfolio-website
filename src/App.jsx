@@ -94,6 +94,14 @@ const interests = [
   "Product Launches",
 ];
 
+const profile = {
+  name: "Elvis Carter",
+  email: "machaelvice8@gmail.com",
+  phone: "0761354537",
+  phoneHref: "tel:0761354537",
+  emailHref: "mailto:machaelvice8@gmail.com",
+};
+
 const sectionIds = navItems.map((item) => item.id);
 
 function useActiveSection(ids) {
@@ -137,10 +145,41 @@ export default function App() {
   const [year, setYear] = useState("");
   const [heroPhoto, setHeroPhoto] = useState("/images/hero.png");
   const [profilePhoto, setProfilePhoto] = useState("/images/profile-avatar.png");
+  const [locationStatus, setLocationStatus] = useState(
+    "Requesting visitor location permission..."
+  );
+  const [visitorLocation, setVisitorLocation] = useState(null);
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     setYear(String(new Date().getFullYear()));
+  }, []);
+
+  useEffect(() => {
+    if (!("geolocation" in navigator)) {
+      setLocationStatus("Location is not supported on this browser.");
+      return;
+    }
+
+    const success = ({ coords }) => {
+      setVisitorLocation({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      });
+      setLocationStatus("Live visitor location shared by browser permission.");
+    };
+
+    const error = () => {
+      setLocationStatus(
+        "Visitor location is unavailable until location permission is allowed."
+      );
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 300000,
+    });
   }, []);
 
   useEffect(() => {
@@ -177,11 +216,15 @@ export default function App() {
     );
   };
 
+  const visitorMapUrl = visitorLocation
+    ? `https://www.google.com/maps?q=${visitorLocation.latitude},${visitorLocation.longitude}&z=15&output=embed`
+    : "";
+
   return (
     <>
       <header className="site-header">
         <nav className="nav container">
-          <a className="brand" href="#home">
+          <a className="brand" href="#home" onClick={handleNavClick}>
             Elvis<span>.</span>
           </a>
           <button
@@ -309,15 +352,15 @@ export default function App() {
               <ul className="about-list">
                 <li>
                   <span>Name</span>
-                  <strong>Elvis Carter</strong>
+                  <strong>{profile.name}</strong>
                 </li>
                 <li>
                   <span>Email</span>
-                  <strong>hello@elviscarter.dev</strong>
+                  <strong>{profile.email}</strong>
                 </li>
                 <li>
                   <span>Phone</span>
-                  <strong>+255 700 000 000</strong>
+                  <strong>{profile.phone}</strong>
                 </li>
                 <li>
                   <span>Focus</span>
@@ -458,18 +501,39 @@ export default function App() {
               <div className="contact-details">
                 <div>
                   <span>Email</span>
-                  <a href="mailto:machaelvice8@gmail.com">
-                    machaelvice8@gmail.com
-                  </a>
+                  <a href={profile.emailHref}>{profile.email}</a>
                 </div>
                 <div>
                   <span>Phone</span>
-                  <a href="tel:0761354537">0761354537</a>
+                  <a href={profile.phoneHref}>{profile.phone}</a>
                 </div>
                 <div>
                   <span>Location</span>
                   <p>Dar es Salaam, Tanzania</p>
                 </div>
+              </div>
+
+              <div className="visitor-location-card">
+                <div className="visitor-location-copy">
+                  <span>Visitor Location</span>
+                  <p>{locationStatus}</p>
+                  {visitorLocation ? (
+                    <strong>
+                      {visitorLocation.latitude.toFixed(6)},{" "}
+                      {visitorLocation.longitude.toFixed(6)}
+                    </strong>
+                  ) : null}
+                </div>
+
+                {visitorLocation ? (
+                  <iframe
+                    className="visitor-map"
+                    title="Visitor live location map"
+                    src={visitorMapUrl}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                ) : null}
               </div>
             </div>
 
@@ -498,7 +562,7 @@ export default function App() {
       <footer className="site-footer">
         <div className="container footer-layout">
           <div>
-            <a className="brand footer-brand" href="#home">
+            <a className="brand footer-brand" href="#home" onClick={handleNavClick}>
               Elvis<span>.</span>
             </a>
             <p>
