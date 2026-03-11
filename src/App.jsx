@@ -111,8 +111,6 @@ const profile = {
 };
 
 const imagePaths = {
-  hero: "/images/hero-collage.png",
-  heroFallback: "/images/hero.png",
   placeholder: "/images/hero-placeholder.svg",
   profile: "/images/profile-avatar.png",
 };
@@ -158,7 +156,6 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
   const [year, setYear] = useState("");
-  const [heroPhoto, setHeroPhoto] = useState(imagePaths.hero);
   const [profilePhoto, setProfilePhoto] = useState(imagePaths.profile);
   const [locationStatus, setLocationStatus] = useState(
     "Requesting visitor location permission..."
@@ -304,25 +301,6 @@ export default function App() {
               </dl>
             </div>
 
-            <div className="hero-visual">
-              <div className="hero-artwork">
-                <div className="hero-artwork-glow"></div>
-                <img
-                  className="hero-photo"
-                  src={heroPhoto}
-                  alt="Elvis Carter portrait"
-                  loading="eager"
-                  decoding="async"
-                  onError={() => {
-                    if (heroPhoto === imagePaths.hero) {
-                      setHeroPhoto(imagePaths.heroFallback);
-                    } else if (heroPhoto === imagePaths.heroFallback) {
-                      setHeroPhoto(imagePaths.placeholder);
-                    }
-                  }}
-                />
-              </div>
-            </div>
           </div>
         </section>
 
