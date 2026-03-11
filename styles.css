@@ -1,15 +1,15 @@
 :root {
-  --bg: #f4efe6;
-  --bg-soft: #e7dccd;
-  --panel: #fbf7f1;
-  --panel-strong: #fffdf9;
-  --text: #191611;
-  --muted: #6f675b;
-  --line: rgba(25, 22, 17, 0.12);
-  --accent: #b2aa7b;
-  --accent-strong: #8f875f;
-  --accent-dark: #3d4330;
-  --shadow: 0 30px 70px -40px rgba(25, 22, 17, 0.38);
+  --bg: #12001f;
+  --bg-soft: #2b0a57;
+  --panel: rgba(0, 0, 0, 0.42);
+  --panel-strong: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.78);
+  --line: rgba(255, 255, 255, 0.16);
+  --accent: #8f2bff;
+  --accent-strong: #a64dff;
+  --accent-dark: #42106d;
+  --shadow: 0 30px 70px -40px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -22,12 +22,17 @@ html {
 
 body {
   margin: 0;
-  font-family: Poppins, sans-serif;
+  font-family: Arial, sans-serif;
   color: var(--text);
   overflow-x: hidden;
   background:
-    radial-gradient(circle at top left, rgba(178, 170, 123, 0.18), transparent 30%),
-    linear-gradient(180deg, #f7f2ea 0%, #f2ebdf 50%, #efe5d7 100%);
+    radial-gradient(circle at 50% 18%, rgba(196, 133, 255, 0.9) 0%, rgba(143, 43, 255, 0.7) 12%, rgba(77, 18, 155, 0.45) 24%, rgba(18, 0, 31, 0) 42%),
+    radial-gradient(circle at 18% 42%, rgba(123, 34, 255, 0.7) 0%, rgba(66, 16, 109, 0.45) 20%, rgba(18, 0, 31, 0) 48%),
+    radial-gradient(circle at 82% 36%, rgba(157, 76, 255, 0.55) 0%, rgba(66, 16, 109, 0.3) 22%, rgba(18, 0, 31, 0) 46%),
+    linear-gradient(180deg, #2a0052 0%, #1a0036 34%, #12001f 100%);
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
 }
 
 img {
@@ -36,8 +41,12 @@ img {
 }
 
 a {
-  color: inherit;
+  color: #9b56d1;
   text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
 }
 
 button,
@@ -56,8 +65,8 @@ textarea {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(18px);
-  background: rgba(251, 247, 241, 0.86);
-  border-bottom: 1px solid rgba(25, 22, 17, 0.06);
+  background: rgba(26, 0, 54, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .nav {
@@ -105,14 +114,14 @@ section[id] {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--text);
-  background: rgba(178, 170, 123, 0.14);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .menu-btn {
   display: none;
   border: 1px solid var(--line);
-  background: var(--panel-strong);
-  color: var(--text);
+  background: rgba(155, 86, 209, 0.95);
+  color: #fff;
   border-radius: 999px;
   padding: 0.55rem 0.95rem;
 }
@@ -190,19 +199,20 @@ section[id] {
 }
 
 .btn-solid {
-  background: var(--accent-strong);
+  background: #9b56d1;
   color: #fff;
-  box-shadow: 0 18px 30px -22px rgba(143, 135, 95, 0.85);
+  box-shadow: 0 18px 30px -22px rgba(155, 86, 209, 0.85);
 }
 
 .btn-outline {
   background: transparent;
-  border-color: var(--line);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
 }
 
 .btn-light {
   background: #fff;
-  color: var(--accent-dark);
+  color: #5f3b8c;
 }
 
 .hero-meta {
@@ -243,8 +253,8 @@ section[id] {
   border-radius: 38px;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(61, 67, 48, 0.85) 0%, rgba(61, 67, 48, 0.18) 100%),
-    linear-gradient(135deg, rgba(178, 170, 123, 0.46), rgba(255, 255, 255, 0.35));
+    linear-gradient(180deg, rgba(72, 0, 131, 0.52) 0%, rgba(18, 0, 31, 0.2) 100%),
+    linear-gradient(135deg, rgba(143, 43, 255, 0.4), rgba(255, 255, 255, 0.08));
   box-shadow: var(--shadow);
 }
 
@@ -252,8 +262,9 @@ section[id] {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(15, 15, 15, 0.12) 100%);
+    radial-gradient(circle at 50% 5%, rgba(255, 255, 255, 0.55), rgba(183, 111, 255, 0.2) 18%, transparent 36%),
+    radial-gradient(circle at 20% 34%, rgba(143, 43, 255, 0.25), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(15, 15, 15, 0.18) 100%);
 }
 
 .hero-photo {
@@ -301,8 +312,8 @@ section[id] {
 .contact-form,
 .contact-copy {
   border-radius: 28px;
-  background: rgba(255, 253, 249, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: var(--shadow);
 }
 
@@ -358,6 +369,7 @@ section[id] {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 5vw, 3.2rem);
   line-height: 1.05;
+  color: #ffffff;
 }
 
 .about-copy > p,
@@ -401,8 +413,8 @@ section[id] {
 
 .interest-item {
   padding: 1rem 1.1rem;
-  border-left: 3px solid var(--accent);
-  background: rgba(255, 255, 255, 0.4);
+  border-left: 3px solid #9b56d1;
+  background: rgba(0, 0, 0, 0.35);
   border-radius: 18px;
   font-weight: 600;
 }
@@ -503,7 +515,7 @@ section[id] {
 
 .service-card:hover {
   transform: translateY(-4px);
-  background: rgba(178, 170, 123, 0.88);
+  background: rgba(95, 59, 140, 0.92);
 }
 
 .service-card:hover p,
@@ -518,8 +530,8 @@ section[id] {
   display: grid;
   place-items: center;
   margin-bottom: 1rem;
-  background: rgba(178, 170, 123, 0.18);
-  color: var(--accent-dark);
+  background: rgba(155, 86, 209, 0.2);
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -530,7 +542,7 @@ section[id] {
   gap: 2rem;
   padding: 2rem 2.2rem;
   border-radius: 34px;
-  background: linear-gradient(135deg, #aca475 0%, #8d855d 55%, #68704d 100%);
+  background: linear-gradient(135deg, #9b56d1 0%, #5f3b8c 55%, #4c6f98 100%);
   color: #fff;
   box-shadow: var(--shadow);
 }
@@ -636,8 +648,8 @@ section[id] {
   margin-top: 1.5rem;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(25, 22, 17, 0.08);
-  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .visitor-location-copy {
@@ -687,16 +699,21 @@ section[id] {
 .contact-form textarea {
   width: 100%;
   padding: 1rem 1.1rem;
-  border: 1px solid rgba(25, 22, 17, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.76);
-  color: var(--text);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  outline: 2px solid rgba(143, 135, 95, 0.22);
-  border-color: var(--accent-strong);
+  outline: 2px solid rgba(155, 86, 209, 0.25);
+  border-color: #9b56d1;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .form-status {
