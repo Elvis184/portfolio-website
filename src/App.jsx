@@ -116,6 +116,7 @@ const imagePaths = {
 };
 
 const sectionIds = navItems.map((item) => item.id);
+const heroWords = ["Frontend", "Websites", "Interfaces", "Experiences"];
 
 function useActiveSection(ids) {
   const [activeSection, setActiveSection] = useState(ids[0]);
@@ -161,10 +162,47 @@ export default function App() {
     "Requesting visitor location permission..."
   );
   const [visitorLocation, setVisitorLocation] = useState(null);
+  const [typedWord, setTypedWord] = useState("");
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     setYear(String(new Date().getFullYear()));
+  }, []);
+
+  useEffect(() => {
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timeoutId;
+
+    const tick = () => {
+      const currentWord = heroWords[wordIndex];
+
+      if (deleting) {
+        charIndex -= 1;
+      } else {
+        charIndex += 1;
+      }
+
+      setTypedWord(currentWord.slice(0, charIndex));
+
+      if (!deleting && charIndex === currentWord.length) {
+        deleting = true;
+        timeoutId = window.setTimeout(tick, 1100);
+        return;
+      }
+
+      if (deleting && charIndex === 0) {
+        deleting = false;
+        wordIndex = (wordIndex + 1) % heroWords.length;
+      }
+
+      timeoutId = window.setTimeout(tick, deleting ? 70 : 110);
+    };
+
+    timeoutId = window.setTimeout(tick, 500);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -273,7 +311,11 @@ export default function App() {
             <div className="hero-copy">
               <p className="eyebrow">Hello, this is Elvis</p>
               <h1>
-                Creative <span>Frontend</span>
+                Creative{" "}
+                <span className="hero-typed" aria-hidden="true">
+                  {typedWord || "\u00A0"}
+                </span>
+                <span className="sr-only">Frontend</span>
                 <br />
                 Developer &amp; Digital Builder
               </h1>
