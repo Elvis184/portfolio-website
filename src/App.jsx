@@ -33,12 +33,42 @@ const stats = [
 ];
 
 const trustItems = [
-  { name: "React", icon: SiReact, className: "trust-react" },
-  { name: "Vite", icon: SiVite, className: "trust-vite" },
-  { name: "Figma", icon: SiFigma, className: "trust-figma" },
-  { name: "Firebase", icon: SiFirebase, className: "trust-firebase" },
-  { name: "Vercel", icon: SiVercel, className: "trust-vercel" },
-  { name: "GitHub", icon: SiGithub, className: "trust-github" },
+  {
+    name: "React",
+    icon: SiReact,
+    className: "trust-react",
+    href: "https://react.dev/",
+  },
+  {
+    name: "Vite",
+    icon: SiVite,
+    className: "trust-vite",
+    href: "https://vite.dev/",
+  },
+  {
+    name: "Figma",
+    icon: SiFigma,
+    className: "trust-figma",
+    href: "https://www.figma.com/",
+  },
+  {
+    name: "Firebase",
+    icon: SiFirebase,
+    className: "trust-firebase",
+    href: "https://firebase.google.com/",
+  },
+  {
+    name: "Vercel",
+    icon: SiVercel,
+    className: "trust-vercel",
+    href: "https://vercel.com/",
+  },
+  {
+    name: "GitHub",
+    icon: SiGithub,
+    className: "trust-github",
+    href: "https://github.com/",
+  },
 ];
 
 const skills = [
@@ -134,6 +164,9 @@ const imagePaths = {
 
 const sectionIds = navItems.map((item) => item.id);
 const heroWords = ["Frontend", "Websites", "Interfaces", "Experiences"];
+const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
+const autoReplyTemplate =
+  "Thank you for reaching out. Your message has been received successfully. I will review your request and get back to you as soon as possible with the next steps.";
 
 function useActiveSection(ids) {
   const [activeSection, setActiveSection] = useState(ids[0]);
@@ -173,6 +206,7 @@ function useActiveSection(ids) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [year, setYear] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(imagePaths.profile);
   const [locationStatus, setLocationStatus] = useState(
@@ -281,11 +315,55 @@ export default function App() {
     setMenuOpen(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormStatus(
-      "Message captured. Connect this form to email or Formspree for live delivery."
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const projectType = String(formData.get("projectType") || "").trim();
+    const displayName = name || "there";
+    const displayProject = projectType || "your project";
+
+    if (!formEndpoint) {
+      setFormStatus(
+        `Hi ${displayName}, your message about ${displayProject} is ready, but live email sending is not configured yet. Add VITE_FORMSPREE_ENDPOINT to enable delivery and auto-replies.`
+      );
+      return;
+    }
+
+    formData.append("_subject", `New portfolio inquiry: ${displayProject}`);
+    formData.append(
+      "auto_reply_message",
+      `Hi ${displayName}, thank you for reaching out about ${displayProject}. ${autoReplyTemplate}`
     );
+
+    try {
+      setIsSubmitting(true);
+      setFormStatus("Sending your message...");
+
+      const response = await fetch(formEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setFormStatus(
+        `Hi ${displayName}, thank you for reaching out about ${displayProject}. Your message has been sent successfully, and a reply will be sent to ${email || "your email"} once the autoresponse workflow is enabled in Formspree.`
+      );
+      event.currentTarget.reset();
+    } catch {
+      setFormStatus(
+        `Hi ${displayName}, I could not send your message right now. Please try again in a moment or contact me directly at ${profile.email}.`
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const visitorMapUrl = visitorLocation
@@ -386,7 +464,14 @@ export default function App() {
 
             <div className="trust-grid">
               {trustItems.map((item) => (
-                <article className="trust-card" key={item.name}>
+                <a
+                  className="trust-card"
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${item.name}`}
+                >
                   <span
                     className={`trust-mark ${item.className}`}
                     aria-hidden="true"
@@ -394,7 +479,7 @@ export default function App() {
                     <item.icon />
                   </span>
                   <span className="trust-name">{item.name}</span>
-                </article>
+                </a>
               ))}
             </div>
           </div>
@@ -618,17 +703,42 @@ export default function App() {
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="field-row">
-                <input type="text" placeholder="Your Name" required />
-                <input type="email" placeholder="Your Email" required />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  autoComplete="name"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  autoComplete="email"
+                  required
+                />
               </div>
-              <input type="text" placeholder="Project Type" required />
+              <input
+                type="text"
+                name="projectType"
+                placeholder="Project Type"
+                required
+              />
               <textarea
+                name="message"
                 rows="7"
                 placeholder="Tell me about your project"
                 required
               ></textarea>
-              <button className="btn btn-solid" type="submit">
-                Send Message
+              <input
+                type="text"
+                name="_gotcha"
+                className="honey-field"
+                tabIndex="-1"
+                autoComplete="off"
+              />
+              <button className="btn btn-solid" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Message"}
               </button>
               <p className="form-status" aria-live="polite">
                 {formStatus}

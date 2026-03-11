@@ -903,6 +903,21 @@ section[id] {
   color: rgba(255, 255, 255, 0.65);
 }
 
+.contact-form button:disabled {
+  opacity: 0.72;
+  cursor: wait;
+  transform: none;
+}
+
+.honey-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-status {
   min-height: 1.5rem;
   margin: 0;
