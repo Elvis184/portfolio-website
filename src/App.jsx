@@ -143,7 +143,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
   const [year, setYear] = useState("");
-  const [heroPhoto, setHeroPhoto] = useState("/images/hero.png");
+  const [heroPhoto, setHeroPhoto] = useState("/images/hero-collage.png");
   const [profilePhoto, setProfilePhoto] = useState("/images/profile-avatar.png");
   const [locationStatus, setLocationStatus] = useState(
     "Requesting visitor location permission..."
@@ -289,48 +289,22 @@ export default function App() {
             </div>
 
             <div className="hero-visual">
-              <div className="hero-stack">
-                <div className="hero-panel hero-panel-far">
-                  <img
-                    className="hero-photo"
-                    src={heroPhoto}
-                    alt="Elvis Carter portrait"
-                    loading="eager"
-                    decoding="async"
-                    onError={() => {
-                      if (!heroPhoto.endsWith("hero-placeholder.svg")) {
-                        setHeroPhoto("/images/hero-placeholder.svg");
-                      }
-                    }}
-                  />
-                </div>
-                <div className="hero-panel hero-panel-mid">
-                  <img
-                    className="hero-photo"
-                    src={heroPhoto}
-                    alt="Elvis Carter portrait"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-                <div className="hero-panel hero-panel-near">
-                  <img
-                    className="hero-photo"
-                    src={heroPhoto}
-                    alt="Elvis Carter portrait"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-                <div className="hero-panel hero-panel-main">
-                  <img
-                    className="hero-photo"
-                    src={heroPhoto}
-                    alt="Elvis Carter portrait"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
+              <div className="hero-artwork">
+                <div className="hero-artwork-glow"></div>
+                <img
+                  className="hero-photo"
+                  src={heroPhoto}
+                  alt="Elvis Carter portrait"
+                  loading="eager"
+                  decoding="async"
+                  onError={() => {
+                    if (heroPhoto.endsWith("hero-collage.png")) {
+                      setHeroPhoto("/images/hero.png");
+                    } else if (heroPhoto.endsWith("hero.png")) {
+                      setHeroPhoto("/images/hero-placeholder.svg");
+                    }
+                  }}
+                />
               </div>
             </div>
           </div>
