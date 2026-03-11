@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
+import {
+  FiBriefcase,
+  FiHome,
+  FiLayers,
+  FiMail,
+  FiTool,
+  FiUser,
+} from "react-icons/fi";
 
 const navItems = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "services", label: "Services" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: "home", label: "Home", icon: FiHome },
+  { id: "about", label: "About", icon: FiUser },
+  { id: "skills", label: "Skills", icon: FiTool },
+  { id: "services", label: "Services", icon: FiLayers },
+  { id: "projects", label: "Projects", icon: FiBriefcase },
+  { id: "contact", label: "Contact", icon: FiMail },
 ];
 
 const stats = [
@@ -253,7 +261,8 @@ export default function App() {
                   className={activeSection === item.id ? "active" : ""}
                   onClick={handleNavClick}
                 >
-                  {item.label}
+                  <item.icon className="nav-icon" aria-hidden="true" />
+                  <span>{item.label}</span>
                 </a>
               </li>
             ))}
