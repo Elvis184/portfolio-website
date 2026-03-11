@@ -713,6 +713,38 @@ section[id] {
   border: 0;
 }
 
+.policy-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.6rem;
+  border-radius: 28px;
+  background: #1d0936;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.policy-block {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.policy-block:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.policy-block h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.policy-block p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
 .contact-form {
   display: grid;
   gap: 1rem;

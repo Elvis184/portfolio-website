@@ -591,6 +591,57 @@ export default function App() {
             </form>
           </div>
         </section>
+
+        <section className="section policy-section" id="privacy">
+          <div className="container">
+            <div className="section-heading">
+              <p className="section-kicker">Privacy Policy</p>
+              <h2>Your Privacy</h2>
+              <p>
+                This website respects visitor privacy and only uses information
+                needed to respond to messages, improve the site experience, and
+                display requested browser features.
+              </p>
+            </div>
+
+            <div className="policy-card">
+              <div className="policy-block">
+                <h3>Information Collected</h3>
+                <p>
+                  If you submit the contact form, the information you enter such
+                  as your name, email address, and message may be used to reply
+                  to your inquiry.
+                </p>
+              </div>
+
+              <div className="policy-block">
+                <h3>Location Access</h3>
+                <p>
+                  Location is only requested through your browser with your
+                  permission. If you deny access, the site will not track or
+                  store your live location.
+                </p>
+              </div>
+
+              <div className="policy-block">
+                <h3>Cookies and Analytics</h3>
+                <p>
+                  This site does not intentionally use invasive tracking. If
+                  analytics or third-party tools are added later, this policy
+                  should be updated to reflect that usage clearly.
+                </p>
+              </div>
+
+              <div className="policy-block">
+                <h3>Contact</h3>
+                <p>
+                  For privacy questions, contact{" "}
+                  <a href={profile.emailHref}>{profile.email}</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="site-footer">
@@ -609,6 +660,7 @@ export default function App() {
             <a href="#services">Services</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policy</a>
           </div>
           <p className="footer-copy">
             &copy; <span>{year}</span> Elvis Carter. All rights reserved.
