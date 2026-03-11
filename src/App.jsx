@@ -24,6 +24,15 @@ const stats = [
   { value: "99%", label: "Mobile-first delivery focus" },
 ];
 
+const trustItems = [
+  { name: "React", mark: "R" },
+  { name: "Vite", mark: "V" },
+  { name: "Figma", mark: "F" },
+  { name: "Firebase", mark: "B" },
+  { name: "Vercel", mark: "▲" },
+  { name: "GitHub", mark: "G" },
+];
+
 const skills = [
   {
     title: "HTML & CSS",
@@ -353,6 +362,26 @@ export default function App() {
               <span>{stat.label}</span>
             </article>
           ))}
+        </section>
+
+        <section className="section trust-section" aria-labelledby="trust-title">
+          <div className="container">
+            <div className="trust-heading">
+              <h2 id="trust-title">Built with platforms modern teams trust</h2>
+              <div className="trust-divider" aria-hidden="true"></div>
+            </div>
+
+            <div className="trust-grid">
+              {trustItems.map((item) => (
+                <article className="trust-card" key={item.name}>
+                  <span className="trust-mark" aria-hidden="true">
+                    {item.mark}
+                  </span>
+                  <span className="trust-name">{item.name}</span>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="section about-section" id="about">
