@@ -102,6 +102,13 @@ const profile = {
   emailHref: "mailto:machaelvice8@gmail.com",
 };
 
+const imagePaths = {
+  hero: "/images/hero-collage.png",
+  heroFallback: "/images/hero.png",
+  placeholder: "/images/hero-placeholder.svg",
+  profile: "/images/profile-avatar.png",
+};
+
 const sectionIds = navItems.map((item) => item.id);
 
 function useActiveSection(ids) {
@@ -143,8 +150,8 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
   const [year, setYear] = useState("");
-  const [heroPhoto, setHeroPhoto] = useState("/images/hero-collage.png");
-  const [profilePhoto, setProfilePhoto] = useState("/images/profile-avatar.png");
+  const [heroPhoto, setHeroPhoto] = useState(imagePaths.hero);
+  const [profilePhoto, setProfilePhoto] = useState(imagePaths.profile);
   const [locationStatus, setLocationStatus] = useState(
     "Requesting visitor location permission..."
   );
@@ -298,10 +305,10 @@ export default function App() {
                   loading="eager"
                   decoding="async"
                   onError={() => {
-                    if (heroPhoto.endsWith("hero-collage.png")) {
-                      setHeroPhoto("/images/hero.png");
-                    } else if (heroPhoto.endsWith("hero.png")) {
-                      setHeroPhoto("/images/hero-placeholder.svg");
+                    if (heroPhoto === imagePaths.hero) {
+                      setHeroPhoto(imagePaths.heroFallback);
+                    } else if (heroPhoto === imagePaths.heroFallback) {
+                      setHeroPhoto(imagePaths.placeholder);
                     }
                   }}
                 />
@@ -330,8 +337,8 @@ export default function App() {
                   loading="lazy"
                   decoding="async"
                   onError={() => {
-                    if (!profilePhoto.endsWith("hero-placeholder.svg")) {
-                      setProfilePhoto("/images/hero-placeholder.svg");
+                    if (profilePhoto !== imagePaths.placeholder) {
+                      setProfilePhoto(imagePaths.placeholder);
                     }
                   }}
                 />
