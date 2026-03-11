@@ -289,25 +289,49 @@ export default function App() {
             </div>
 
             <div className="hero-visual">
-              <div className="hero-card">
-                <div className="hero-card-backdrop"></div>
-                <img
-                  className="hero-photo"
-                  src={heroPhoto}
-                  alt="Elvis Carter portrait"
-                  loading="eager"
-                  decoding="async"
-                  onError={() => {
-                    if (!heroPhoto.endsWith("hero-placeholder.svg")) {
-                      setHeroPhoto("/images/hero-placeholder.svg");
-                    }
-                  }}
-                />
+              <div className="hero-stack">
+                <div className="hero-panel hero-panel-far">
+                  <img
+                    className="hero-photo"
+                    src={heroPhoto}
+                    alt="Elvis Carter portrait"
+                    loading="eager"
+                    decoding="async"
+                    onError={() => {
+                      if (!heroPhoto.endsWith("hero-placeholder.svg")) {
+                        setHeroPhoto("/images/hero-placeholder.svg");
+                      }
+                    }}
+                  />
+                </div>
+                <div className="hero-panel hero-panel-mid">
+                  <img
+                    className="hero-photo"
+                    src={heroPhoto}
+                    alt="Elvis Carter portrait"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+                <div className="hero-panel hero-panel-near">
+                  <img
+                    className="hero-photo"
+                    src={heroPhoto}
+                    alt="Elvis Carter portrait"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+                <div className="hero-panel hero-panel-main">
+                  <img
+                    className="hero-photo"
+                    src={heroPhoto}
+                    alt="Elvis Carter portrait"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
               </div>
-              <article className="floating-note">
-                <span className="note-label">Available for work</span>
-                <strong>Web design, frontend, landing pages</strong>
-              </article>
             </div>
           </div>
         </section>
