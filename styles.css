@@ -64,9 +64,8 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(18px);
-  background: rgba(26, 0, 54, 0.45);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: #2a0052;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav {
@@ -253,8 +252,8 @@ section[id] {
   border-radius: 38px;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(72, 0, 131, 0.52) 0%, rgba(18, 0, 31, 0.2) 100%),
-    linear-gradient(135deg, rgba(143, 43, 255, 0.4), rgba(255, 255, 255, 0.08));
+    linear-gradient(180deg, rgba(72, 0, 131, 0.88) 0%, rgba(28, 0, 49, 0.92) 100%),
+    linear-gradient(135deg, rgba(143, 43, 255, 0.18), rgba(255, 255, 255, 0.02));
   box-shadow: var(--shadow);
 }
 
@@ -283,8 +282,8 @@ section[id] {
   max-width: 270px;
   padding: 1rem 1.1rem;
   border-radius: 22px;
-  background: rgba(255, 253, 249, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: #f5ecff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   box-shadow: var(--shadow);
 }
 
@@ -312,8 +311,8 @@ section[id] {
 .contact-form,
 .contact-copy {
   border-radius: 28px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #1d0936;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow);
 }
 
@@ -414,7 +413,7 @@ section[id] {
 .interest-item {
   padding: 1rem 1.1rem;
   border-left: 3px solid #9b56d1;
-  background: rgba(0, 0, 0, 0.35);
+  background: #18072d;
   border-radius: 18px;
   font-weight: 600;
 }
@@ -648,8 +647,8 @@ section[id] {
   margin-top: 1.5rem;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #18072d;
 }
 
 .visitor-location-copy {
@@ -701,7 +700,7 @@ section[id] {
   padding: 1rem 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
-  background: rgba(0, 0, 0, 0.35);
+  background: #12041f;
   color: #ffffff;
 }
 
@@ -769,8 +768,8 @@ section[id] {
     width: min(280px, calc(100vw - 2rem));
     padding: 0.75rem;
     border-radius: 24px;
-    background: rgba(255, 253, 249, 0.96);
-    border: 1px solid rgba(25, 22, 17, 0.08);
+    background: #2a0052;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: var(--shadow);
     flex-direction: column;
     align-items: stretch;
