@@ -7,6 +7,14 @@ import {
   FiTool,
   FiUser,
 } from "react-icons/fi";
+import {
+  SiFigma,
+  SiFirebase,
+  SiGithub,
+  SiReact,
+  SiVercel,
+  SiVite,
+} from "react-icons/si";
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
@@ -25,12 +33,12 @@ const stats = [
 ];
 
 const trustItems = [
-  { name: "React", mark: "R" },
-  { name: "Vite", mark: "V" },
-  { name: "Figma", mark: "F" },
-  { name: "Firebase", mark: "B" },
-  { name: "Vercel", mark: "▲" },
-  { name: "GitHub", mark: "G" },
+  { name: "React", icon: SiReact, className: "trust-react" },
+  { name: "Vite", icon: SiVite, className: "trust-vite" },
+  { name: "Figma", icon: SiFigma, className: "trust-figma" },
+  { name: "Firebase", icon: SiFirebase, className: "trust-firebase" },
+  { name: "Vercel", icon: SiVercel, className: "trust-vercel" },
+  { name: "GitHub", icon: SiGithub, className: "trust-github" },
 ];
 
 const skills = [
@@ -179,6 +187,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTypedWord(heroWords[0]);
+      return undefined;
+    }
+
     let wordIndex = 0;
     let charIndex = 0;
     let deleting = false;
@@ -374,8 +387,11 @@ export default function App() {
             <div className="trust-grid">
               {trustItems.map((item) => (
                 <article className="trust-card" key={item.name}>
-                  <span className="trust-mark" aria-hidden="true">
-                    {item.mark}
+                  <span
+                    className={`trust-mark ${item.className}`}
+                    aria-hidden="true"
+                  >
+                    <item.icon />
                   </span>
                   <span className="trust-name">{item.name}</span>
                 </article>
@@ -675,22 +691,57 @@ export default function App() {
 
       <footer className="site-footer">
         <div className="container footer-layout">
-          <div>
-            <a className="brand footer-brand" href="#home" onClick={handleNavClick}>
+          <div className="footer-column footer-column-main">
+            <a
+              className="brand footer-brand"
+              href="#home"
+              onClick={handleNavClick}
+            >
               Elvis<span>.</span>
             </a>
-            <p>
+            <h3>Company Name</h3>
+            <span className="footer-rule" aria-hidden="true"></span>
+            <p className="footer-text">
               Portfolio websites and frontend experiences designed to look sharp
               and ship cleanly.
             </p>
           </div>
-          <div className="footer-links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-            <a href="#privacy">Privacy Policy</a>
+
+          <div className="footer-column">
+            <h3>Products</h3>
+            <span className="footer-rule" aria-hidden="true"></span>
+            <div className="footer-links-list">
+              <a href="#services">Portfolio Websites</a>
+              <a href="#services">Landing Pages</a>
+              <a href="#services">Frontend Builds</a>
+              <a href="#services">Website Refresh</a>
+            </div>
           </div>
+
+          <div className="footer-column">
+            <h3>Useful Links</h3>
+            <span className="footer-rule" aria-hidden="true"></span>
+            <div className="footer-links-list">
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#privacy">Privacy Policy</a>
+            </div>
+          </div>
+
+          <div className="footer-column">
+            <h3>Contact</h3>
+            <span className="footer-rule" aria-hidden="true"></span>
+            <div className="footer-contact-list">
+              <p>{profile.name}</p>
+              <a href={profile.emailHref}>{profile.email}</a>
+              <a href={profile.phoneHref}>{profile.phone}</a>
+              <p>Dar es Salaam, Tanzania</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="container footer-bottom">
           <p className="footer-copy">
             &copy; <span>{year}</span> Elvis Carter. All rights reserved.
           </p>
