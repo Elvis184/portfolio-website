@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const skills = [
@@ -31,6 +32,8 @@ const staggerParent = {
 };
 
 export default function AboutAnimated() {
+  const [imageSrc, setImageSrc] = useState("/images/profile-avatar.png");
+
   return (
     <section
       id="about"
@@ -50,11 +53,12 @@ export default function AboutAnimated() {
           transition={{ duration: 0.35, ease: "easeOut" }}
         >
           <img
-            src="/images/profile-avatar.png"
+            src={imageSrc}
             alt="Elvis standing with a camera"
             className="block h-auto w-full object-cover"
             loading="lazy"
             decoding="async"
+            onError={() => setImageSrc("/images/hero-placeholder.svg")}
           />
         </motion.figure>
 

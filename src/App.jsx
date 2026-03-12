@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AboutAnimated from "./AboutAnimated";
 import {
   FiBriefcase,
   FiFacebook,
@@ -146,13 +147,6 @@ const projects = [
   },
 ];
 
-const interests = [
-  "Interface Design",
-  "Web Apps",
-  "Brand Websites",
-  "Product Launches",
-];
-
 const profile = {
   name: "Elvis Carter",
   email: "machaelvice8@gmail.com",
@@ -181,11 +175,6 @@ const profile = {
       icon: FiFacebook,
     },
   ],
-};
-
-const imagePaths = {
-  placeholder: "/images/hero-placeholder.svg",
-  profile: "/images/profile-avatar.png",
 };
 
 const sectionIds = navItems.map((item) => item.id);
@@ -234,7 +223,6 @@ export default function App() {
   const [formStatus, setFormStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [year, setYear] = useState("");
-  const [profilePhoto, setProfilePhoto] = useState(imagePaths.profile);
   const [locationStatus, setLocationStatus] = useState(
     "Requesting visitor location permission..."
   );
@@ -518,73 +506,7 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section about-section" id="about">
-          <div className="container two-column">
-            <div className="about-visual">
-              <div className="portrait-frame">
-                <img
-                  className="portrait"
-                  src={profilePhoto}
-                  alt="Elvis Carter profile"
-                  loading="lazy"
-                  decoding="async"
-                  onError={() => {
-                    if (profilePhoto !== imagePaths.placeholder) {
-                      setProfilePhoto(imagePaths.placeholder);
-                    }
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="about-copy">
-              <p className="section-kicker">My Intro</p>
-              <h2>About Me</h2>
-              <p>
-                Hello! I'm Elvis, a passionate and dedicated developer based in
-                Tanzania. With a strong foundation in HTML, CSS, JavaScript,
-                React, Vite, Firebase, and Figma, I enjoy solving complex
-                problems and creating efficient, scalable digital experiences.
-                I keep sharpening my skills through projects and continuous
-                learning, with a strong focus on frontend development, UI
-                systems, and modern web experiences.
-              </p>
-              <p>
-                As a problem solver, I aim to build software that makes a real
-                impact. I believe in writing clean, maintainable code while
-                staying current with modern tools and industry trends. When I'm
-                not coding, I enjoy exploring creative ideas, refining design
-                details, and collaborating with other developers to build
-                something meaningful.
-              </p>
-              <ul className="about-list">
-                <li>
-                  <span>Name</span>
-                  <strong>{profile.name}</strong>
-                </li>
-                <li>
-                  <span>Email</span>
-                  <strong>{profile.email}</strong>
-                </li>
-                <li>
-                  <span>Phone</span>
-                  <strong>{profile.phone}</strong>
-                </li>
-                <li>
-                  <span>Focus</span>
-                  <strong>Frontend, UI systems, web strategy</strong>
-                </li>
-              </ul>
-              <div className="interest-grid">
-                {interests.map((interest) => (
-                  <div className="interest-item" key={interest}>
-                    {interest}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <AboutAnimated />
 
         <section className="section skills-section" id="skills">
           <div className="container">
