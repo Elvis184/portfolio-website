@@ -541,10 +541,21 @@ export default function App() {
               <p className="section-kicker">My Intro</p>
               <h2>About Me</h2>
               <p>
-                I build websites that feel premium, load quickly, and
-                communicate clearly. My work sits between design and engineering,
-                so the final result looks strong and still holds up in
-                production.
+                Hello! I'm Elvis, a passionate and dedicated developer based in
+                Tanzania. With a strong foundation in HTML, CSS, JavaScript,
+                React, Vite, Firebase, and Figma, I enjoy solving complex
+                problems and creating efficient, scalable digital experiences.
+                I keep sharpening my skills through projects and continuous
+                learning, with a strong focus on frontend development, UI
+                systems, and modern web experiences.
+              </p>
+              <p>
+                As a problem solver, I aim to build software that makes a real
+                impact. I believe in writing clean, maintainable code while
+                staying current with modern tools and industry trends. When I'm
+                not coding, I enjoy exploring creative ideas, refining design
+                details, and collaborating with other developers to build
+                something meaningful.
               </p>
               <ul className="about-list">
                 <li>
