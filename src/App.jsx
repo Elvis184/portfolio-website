@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import {
   FiBriefcase,
+  FiFacebook,
   FiHome,
+  FiInstagram,
   FiLayers,
   FiMail,
+  FiMessageCircle,
+  FiSend,
   FiTool,
   FiUser,
 } from "react-icons/fi";
@@ -155,6 +159,28 @@ const profile = {
   phone: "0761354537",
   phoneHref: "tel:0761354537",
   emailHref: "mailto:machaelvice8@gmail.com",
+  socialLinks: [
+    {
+      name: "WhatsApp",
+      href: "https://api.whatsapp.com/send?phone=255761354537&text=Hello%20I%20want%20more%20information",
+      icon: FiMessageCircle,
+    },
+    {
+      name: "Telegram",
+      href: "https://l.instagram.com/?u=https%3A%2F%2Ft.me%2Fjonaselvis18%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAb21jcAQfZxdleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafOp_tpokDgAQZrHj4lYT9ZccwdlLr8LzohhSavAbar1_4e62AVMqJYQO_NHQ_aem_NLiD7BDCfdFn7mHFoEdVkw&e=AT7vT4BH-LI6DWCC7SxdlTSwOvqeQG0tAKoRG8XInTlHmtEvm1kJuZ24OyLiQYO9PPN8eV-0elbeR5afBSzapSdwteM6SnGueWL2R-VpDA&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnzqf7aaJA4AEGax4-JWE_WXHMHZS6_C86IYUmrwG2q9f-HutgFTKiWEDvzR0_aem_NLiD7BDCfdFn7mHFoEdVkw",
+      icon: FiSend,
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/drumm1er8_boy?igsh=eTNnNmx6b3g4NTE1",
+      icon: FiInstagram,
+    },
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/aglow.drummer",
+      icon: FiFacebook,
+    },
+  ],
 };
 
 const imagePaths = {
@@ -847,6 +873,21 @@ export default function App() {
               <a href={profile.emailHref}>{profile.email}</a>
               <a href={profile.phoneHref}>{profile.phone}</a>
               <p>Dar es Salaam, Tanzania</p>
+            </div>
+            <div className="footer-socials" aria-label="Social media links">
+              {profile.socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  className="footer-social-link"
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={link.name}
+                  title={link.name}
+                >
+                  <link.icon aria-hidden="true" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
