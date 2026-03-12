@@ -25,12 +25,15 @@ function assertLength(value, maxLength, field, errors) {
 }
 
 export function validateContactPayload(payload, minFormFillMs) {
-  const name = normalizeText(payload.name);
-  const email = normalizeText(payload.email).toLowerCase();
-  const subject = normalizeText(payload.subject);
-  const message = normalizeText(payload.message);
-  const company = normalizeText(payload.company);
-  const formStartedAt = Number(payload.formStartedAt);
+  const input =
+    payload && typeof payload === "object" && !Array.isArray(payload) ? payload : {};
+
+  const name = normalizeText(input.name);
+  const email = normalizeText(input.email).toLowerCase();
+  const subject = normalizeText(input.subject);
+  const message = normalizeText(input.message);
+  const company = normalizeText(input.company);
+  const formStartedAt = Number(input.formStartedAt);
   const errors = [];
 
   if (!name) errors.push("Name is required.");

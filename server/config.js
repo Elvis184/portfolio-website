@@ -21,8 +21,14 @@ export const config = {
   allowedOrigin: process.env.ALLOWED_ORIGIN || "http://localhost:5173",
   trustProxy: getBoolean(process.env.TRUST_PROXY, false),
   emailTransportMode: process.env.EMAIL_TRANSPORT_MODE || "smtp",
-  adminEmail: process.env.CONTACT_ADMIN_EMAIL || "info.elviontech@gmail.com",
-  fromEmail: process.env.CONTACT_FROM_EMAIL || "info.elviontech@gmail.com",
+  adminEmail:
+    process.env.ADMIN_EMAIL ||
+    process.env.CONTACT_ADMIN_EMAIL ||
+    "info.elviontech@gmail.com",
+  fromEmail:
+    process.env.CONTACT_FROM_EMAIL ||
+    process.env.SMTP_USER ||
+    "info.elviontech@gmail.com",
   autoReplySubject:
     process.env.AUTO_REPLY_SUBJECT || "Thanks for contacting Elvion Tech",
   autoReplyResponseWindow:
@@ -47,8 +53,8 @@ export const config = {
 export function validateConfig() {
   const missing = [];
 
-  if (!config.adminEmail) missing.push("CONTACT_ADMIN_EMAIL");
-  if (!config.fromEmail) missing.push("CONTACT_FROM_EMAIL");
+  if (!config.adminEmail) missing.push("ADMIN_EMAIL");
+  if (!config.fromEmail) missing.push("SMTP_USER");
 
   if (config.emailTransportMode === "smtp") {
     if (!config.smtp.host) missing.push("SMTP_HOST");

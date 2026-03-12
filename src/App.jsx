@@ -3,7 +3,9 @@ import AboutAnimated from "./AboutAnimated";
 import InfiniteIconScroll from "./components/InfiniteIconScroll";
 import {
   FiBriefcase,
+  FiCheckCircle,
   FiFacebook,
+  FiXCircle,
   FiHome,
   FiInstagram,
   FiLayers,
@@ -133,9 +135,7 @@ const profile = {
 
 const sectionIds = navItems.map((item) => item.id);
 const heroWords = ["Frontend", "Websites", "Interfaces", "Experiences"];
-const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
-const autoReplyTemplate =
-  "Thank you for reaching out. Your message has been received successfully. I will review your request and get back to you as soon as possible with the next steps.";
+const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
 
 function useActiveSection(ids) {
   const [activeSection, setActiveSection] = useState(ids[0]);
@@ -174,14 +174,15 @@ function useActiveSection(ids) {
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState(null);
   const [year, setYear] = useState("");
   const [locationStatus, setLocationStatus] = useState(
     "Requesting visitor location permission..."
   );
   const [visitorLocation, setVisitorLocation] = useState(null);
   const [typedWord, setTypedWord] = useState("");
+  const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
@@ -279,63 +280,75 @@ export default function App() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!toast) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setToast(null);
+    }, 4200);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [toast]);
+
   const handleNavClick = () => {
     setMenuOpen(false);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") || "").trim();
-    const email = String(formData.get("email") || "").trim();
-    const projectType = String(formData.get("projectType") || "").trim();
-    const honeyValue = String(formData.get("_gotcha") || "").trim();
-    const displayName = name || "there";
-    const displayProject = projectType || "your project";
+    const form = event.currentTarget;
 
-    if (honeyValue) {
-      setFormStatus("Thanks. Your message has been received.");
-      event.currentTarget.reset();
+    if (isSubmitting || !form.reportValidity()) {
       return;
     }
 
-    if (!formEndpoint) {
-      setFormStatus(
-        `Hi ${displayName}, your message about ${displayProject} is ready, but live email sending is not configured yet. Add VITE_FORMSPREE_ENDPOINT to enable delivery and auto-replies.`
-      );
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      subject: String(formData.get("subject") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+      company: String(formData.get("company") || "").trim(),
+      formStartedAt,
+    };
+
+    if (payload.company) {
+      form.reset();
+      setFormStartedAt(Date.now());
       return;
     }
-
-    formData.append("_subject", `New portfolio inquiry: ${displayProject}`);
-    formData.append(
-      "auto_reply_message",
-      `Hi ${displayName}, thank you for reaching out about ${displayProject}. ${autoReplyTemplate}`
-    );
 
     try {
       setIsSubmitting(true);
-      setFormStatus("Sending your message...");
+      setToast(null);
 
-      const response = await fetch(formEndpoint, {
+      const response = await fetch(contactApiUrl, {
         method: "POST",
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: formData,
+        body: JSON.stringify(payload),
       });
 
+      const data = await response.json().catch(() => ({}));
+
       if (!response.ok) {
-        throw new Error("Submission failed");
+        throw new Error(data.error || "Failed to send message. Please try again.");
       }
 
-      setFormStatus(
-        `Hi ${displayName}, thank you for reaching out about ${displayProject}. Your message has been sent successfully, and a reply will be sent to ${email || "your email"} once the autoresponse workflow is enabled in Formspree.`
-      );
-      event.currentTarget.reset();
+      form.reset();
+      setFormStartedAt(Date.now());
+      setToast({
+        type: "success",
+        message: "Message sent, check your email.",
+      });
     } catch {
-      setFormStatus(
-        `Hi ${displayName}, I could not send your message right now. Please try again in a moment or contact me directly at ${profile.email}.`
-      );
+      setToast({
+        type: "error",
+        message: "Failed to send message. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -602,7 +615,7 @@ export default function App() {
               </div>
             </div>
 
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <form className="contact-form" onSubmit={handleSubmit} aria-busy={isSubmitting}>
               <div className="field-row">
                 <input
                   type="text"
@@ -621,8 +634,8 @@ export default function App() {
               </div>
               <input
                 type="text"
-                name="projectType"
-                placeholder="Project Type"
+                name="subject"
+                placeholder="Subject / Project Type"
                 required
               />
               <textarea
@@ -633,17 +646,19 @@ export default function App() {
               ></textarea>
               <input
                 type="text"
-                name="_gotcha"
+                name="company"
                 className="honey-field"
                 tabIndex="-1"
                 autoComplete="off"
               />
-              <button className="btn btn-solid" type="submit" disabled={isSubmitting}>
+              <button
+                className="btn btn-solid"
+                type="submit"
+                disabled={isSubmitting}
+                aria-disabled={isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
-              <p className="form-status" aria-live="polite">
-                {formStatus}
-              </p>
             </form>
           </div>
         </section>
@@ -773,6 +788,19 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      {toast ? (
+        <div
+          className={`contact-toast contact-toast-${toast.type}`}
+          role="alert"
+          aria-live="assertive"
+        >
+          <div className="contact-toast-icon" aria-hidden="true">
+            {toast.type === "success" ? <FiCheckCircle /> : <FiXCircle />}
+          </div>
+          <p>{toast.message}</p>
+        </div>
+      ) : null}
     </>
   );
 }

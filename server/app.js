@@ -2,7 +2,6 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { config } from "./config.js";
-import { contactRateLimit } from "./middleware/contactRateLimit.js";
 import contactRouter from "./routes/contact.js";
 
 export function createApp() {
@@ -31,7 +30,7 @@ export function createApp() {
     response.json({ ok: true });
   });
 
-  app.use("/api/contact", contactRateLimit, contactRouter);
+  app.use("/api/contact", contactRouter);
 
   app.use((error, _request, response, _next) => {
     if (error instanceof SyntaxError) {
