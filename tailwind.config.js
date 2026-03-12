@@ -15,6 +15,37 @@ export default {
         sans: ["Inter", "sans-serif"],
         display: ["Sora", "sans-serif"],
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(24px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        ripple: {
+          "0%": {
+            transform: "scale(0.92)",
+            opacity: "0.55",
+          },
+          "100%": {
+            transform: "scale(1.28)",
+            opacity: "0",
+          },
+        },
+      },
+      animation: {
+        fadeIn: "fadeIn 0.6s ease-out forwards",
+        slideUp: "slideUp 0.7s ease-out forwards",
+        ripple: "ripple 0.9s ease-out infinite",
+      },
       boxShadow: {
         glow: "0 0 0 1px rgba(58, 130, 255, 0.28), 0 22px 60px -26px rgba(45, 123, 255, 0.8)",
         card: "0 18px 60px -32px rgba(0, 0, 0, 0.95)",

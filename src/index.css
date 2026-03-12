@@ -15,3 +15,25 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@layer components {
+  .profile-ripple {
+    @apply relative isolate overflow-hidden rounded-full;
+  }
+
+  .profile-ripple::after {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    border-radius: 9999px;
+    border: 1px solid rgba(34, 211, 238, 0.45);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .profile-ripple:hover::after,
+  .profile-ripple:focus-visible::after {
+    opacity: 1;
+    animation: ripple 0.9s ease-out;
+  }
+}

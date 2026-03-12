@@ -429,7 +429,7 @@ export default function App() {
       <main>
         <section className="hero" id="home">
           <div className="hero-shell container">
-            <div className="hero-copy">
+            <div className="hero-copy animate-slideUp">
               <p className="eyebrow">Hello, this is Elvis</p>
               <h1>
                 Creative{" "}

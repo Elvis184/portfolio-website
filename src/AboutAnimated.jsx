@@ -32,7 +32,13 @@ const staggerParent = {
 };
 
 export default function AboutAnimated() {
-  const [imageSrc, setImageSrc] = useState("/images/profile-avatar.png");
+  const [imageSrc, setImageSrc] = useState("images/profile-avatar.png");
+  const [fallbackIndex, setFallbackIndex] = useState(0);
+  const fallbackSources = [
+    "images/profile-avatar.png",
+    "images/hero.png",
+    "images/hero-placeholder.svg",
+  ];
 
   return (
     <section
@@ -44,7 +50,7 @@ export default function AboutAnimated() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <motion.figure
-          className="group mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)]"
+          className="profile-ripple group mx-auto w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-[0_24px_80px_-40px_rgba(0,0,0,0.85)] animate-fadeIn"
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
@@ -58,7 +64,13 @@ export default function AboutAnimated() {
             className="block h-auto w-full object-cover"
             loading="lazy"
             decoding="async"
-            onError={() => setImageSrc("/images/hero-placeholder.svg")}
+            onError={() => {
+              const nextIndex = fallbackIndex + 1;
+              if (nextIndex < fallbackSources.length) {
+                setFallbackIndex(nextIndex);
+                setImageSrc(fallbackSources[nextIndex]);
+              }
+            }}
           />
         </motion.figure>
 
