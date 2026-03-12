@@ -167,7 +167,7 @@ const profile = {
     },
     {
       name: "Telegram",
-      href: "https://l.instagram.com/?u=https%3A%2F%2Ft.me%2Fjonaselvis18%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAb21jcAQfZxdleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafOp_tpokDgAQZrHj4lYT9ZccwdlLr8LzohhSavAbar1_4e62AVMqJYQO_NHQ_aem_NLiD7BDCfdFn7mHFoEdVkw&e=AT7vT4BH-LI6DWCC7SxdlTSwOvqeQG0tAKoRG8XInTlHmtEvm1kJuZ24OyLiQYO9PPN8eV-0elbeR5afBSzapSdwteM6SnGueWL2R-VpDA&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPNTY3MDY3MzQzMzUyNDI3AAGnzqf7aaJA4AEGax4-JWE_WXHMHZS6_C86IYUmrwG2q9f-HutgFTKiWEDvzR0_aem_NLiD7BDCfdFn7mHFoEdVkw",
+      href: "https://t.me/jonaselvis18",
       icon: FiSend,
     },
     {
@@ -347,8 +347,15 @@ export default function App() {
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
     const projectType = String(formData.get("projectType") || "").trim();
+    const honeyValue = String(formData.get("_gotcha") || "").trim();
     const displayName = name || "there";
     const displayProject = projectType || "your project";
+
+    if (honeyValue) {
+      setFormStatus("Thanks. Your message has been received.");
+      event.currentTarget.reset();
+      return;
+    }
 
     if (!formEndpoint) {
       setFormStatus(
@@ -835,7 +842,7 @@ export default function App() {
             >
               Elvis<span>.</span>
             </a>
-            <h3>Company Name</h3>
+            <h3>Elvis Carter</h3>
             <span className="footer-rule" aria-hidden="true"></span>
             <p className="footer-text">
               Portfolio websites and frontend experiences designed to look sharp

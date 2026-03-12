@@ -502,19 +502,17 @@ section[id] {
   overflow: hidden;
   border-radius: 32px;
   width: min(100%, 760px);
-  min-height: 520px;
-  aspect-ratio: 4 / 4.35;
-  background:
-    linear-gradient(160deg, rgba(178, 170, 123, 0.85), rgba(61, 67, 48, 0.82)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+  max-width: 100%;
+  padding: 0;
+  line-height: 0;
   box-shadow: var(--shadow);
 }
 
 .portrait {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
+  height: auto;
+  margin: 0;
 }
 
 .about-copy h2,
@@ -921,7 +919,8 @@ section[id] {
 .form-status {
   min-height: 1.5rem;
   margin: 0;
-  color: var(--accent-dark);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
 }
 
 .site-footer {
@@ -1121,11 +1120,6 @@ section[id] {
 
   .section {
     padding: 4.5rem 0;
-  }
-
-  .portrait-frame {
-    min-height: 420px;
-    aspect-ratio: auto;
   }
 
   .contact-copy,
