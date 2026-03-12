@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AboutAnimated from "./AboutAnimated";
+import InfiniteIconScroll from "./components/InfiniteIconScroll";
 import {
   FiBriefcase,
   FiFacebook,
@@ -12,14 +13,6 @@ import {
   FiTool,
   FiUser,
 } from "react-icons/fi";
-import {
-  SiFigma,
-  SiFirebase,
-  SiGithub,
-  SiReact,
-  SiVercel,
-  SiVite,
-} from "react-icons/si";
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
@@ -35,45 +28,6 @@ const stats = [
   { value: "5+", label: "Years improving UI quality" },
   { value: "18", label: "Brands and founders supported" },
   { value: "99%", label: "Mobile-first delivery focus" },
-];
-
-const trustItems = [
-  {
-    name: "React",
-    icon: SiReact,
-    className: "trust-react",
-    href: "https://react.dev/",
-  },
-  {
-    name: "Vite",
-    icon: SiVite,
-    className: "trust-vite",
-    href: "https://vite.dev/",
-  },
-  {
-    name: "Figma",
-    icon: SiFigma,
-    className: "trust-figma",
-    href: "https://www.figma.com/",
-  },
-  {
-    name: "Firebase",
-    icon: SiFirebase,
-    className: "trust-firebase",
-    href: "https://firebase.google.com/",
-  },
-  {
-    name: "Vercel",
-    icon: SiVercel,
-    className: "trust-vercel",
-    href: "https://vercel.com/",
-  },
-  {
-    name: "GitHub",
-    icon: SiGithub,
-    className: "trust-github",
-    href: "https://github.com/",
-  },
 ];
 
 const skills = [
@@ -483,26 +437,7 @@ export default function App() {
               <div className="trust-divider" aria-hidden="true"></div>
             </div>
 
-            <div className="trust-grid">
-              {trustItems.map((item) => (
-                <a
-                  className="trust-card"
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${item.name}`}
-                >
-                  <span
-                    className={`trust-mark ${item.className}`}
-                    aria-hidden="true"
-                  >
-                    <item.icon />
-                  </span>
-                  <span className="trust-name">{item.name}</span>
-                </a>
-              ))}
-            </div>
+            <InfiniteIconScroll />
           </div>
         </section>
 

@@ -65,11 +65,14 @@ export default function AboutAnimated() {
             loading="lazy"
             decoding="async"
             onError={() => {
-              const nextIndex = fallbackIndex + 1;
-              if (nextIndex < fallbackSources.length) {
-                setFallbackIndex(nextIndex);
-                setImageSrc(fallbackSources[nextIndex]);
-              }
+              setFallbackIndex((currentIndex) => {
+                const nextIndex = currentIndex + 1;
+                if (nextIndex < fallbackSources.length) {
+                  setImageSrc(fallbackSources[nextIndex]);
+                  return nextIndex;
+                }
+                return currentIndex;
+              });
             }}
           />
         </motion.figure>
