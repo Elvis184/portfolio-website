@@ -1,4 +1,4 @@
-import { config } from "../config.js";
+import { config, validateConfig } from "../config.js";
 import { sendContactEmails } from "../services/emailService.js";
 import {
   sanitizeForEmail,
@@ -66,6 +66,7 @@ export async function processContactSubmission({ body, ip = "unknown" }) {
   }
 
   try {
+    validateConfig();
     const safeContact = sanitizeForEmail(validation.contact);
 
     await sendContactEmails(validation.contact, safeContact);
@@ -83,16 +84,24 @@ export async function processContactSubmission({ body, ip = "unknown" }) {
       },
     };
   } catch (error) {
+    const isConfigError =
+      typeof error.message === "string" &&
+      error.message.startsWith("Missing required environment variables:");
+    const isAuthError = error.code === "EAUTH";
+
     logger.error("Contact form submission failed", {
       ip,
       email: validation.contact.email,
       error: error.message,
+      code: error.code || "UNKNOWN",
     });
 
     return {
       status: 500,
       payload: {
-        error: "Failed to send message. Please try again.",
+        error: isConfigError || isAuthError
+          ? "Email service is not configured correctly on the server."
+          : "Failed to send message. Please try again.",
       },
     };
   }

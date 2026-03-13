@@ -2,40 +2,9 @@
 > portfolio-site@1.0.0 dev:server
 > node --watch server/index.js
 
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:09:27.379Z"}
-{"level":"info","message":"Contact email server listening","timestamp":"2026-03-12T21:09:27.392Z","port":8787,"env":"development"}
 Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:11:53.201Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
+{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-13T08:36:35.247Z"}
+{"level":"info","message":"Contact email server listening","timestamp":"2026-03-13T08:36:35.272Z","port":8787,"env":"development"}
 Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:23.688Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:30.398Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:43.684Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
--03-12T21:11:53.216Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:23.693Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:30.882Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:43.748Z"}
-Failed running 'server/index.js'. Waiting for file changes before res{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:43.864Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-connection verified","timestamp":"2026-03-12T21:14:30.536Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:43.628Z"}
-{"level":"info","message":"Contact email server listening","timestamp":"2026-03-12T21:14:43.638Z","port":8787,"env":"development"}
-{"level":"info","message":"Contact form submission processed","timestamp":"2026-03-12T21:15:12.766Z","ip":"::1","email":"info.elviontech@gmail.com","subject":"Shared rate limit check"}
-ssage":"SMTP connection verified","timestamp":"2026-03-12T21:14:30.398Z"}
-{"level":"info","message":"Contact email server listening","timestamp":"2026-03-12T21:14:30.409Z","port":8787,"env":"development"}
-Restarting 'server/index.js'
-{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-12T21:14:43.746Z"}
-Failed running 'server/index.js'. Waiting for file changes before restarting...
+{"level":"info","message":"SMTP connection verified","timestamp":"2026-03-13T08:37:03.348Z"}
+{"level":"info","message":"Contact email server listening","timestamp":"2026-03-13T08:37:03.366Z","port":8787,"env":"development"}

@@ -135,7 +135,29 @@ const profile = {
 
 const sectionIds = navItems.map((item) => item.id);
 const heroWords = ["Frontend", "Websites", "Interfaces", "Experiences"];
-const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
+
+function getContactApiUrl() {
+  const configuredUrl = import.meta.env.VITE_CONTACT_API_URL;
+
+  if (!configuredUrl) {
+    return "/api/contact";
+  }
+
+  const isLocalAbsoluteUrl = /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(
+    configuredUrl
+  );
+  const isLocalHost =
+    typeof window !== "undefined" &&
+    /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+
+  if (isLocalAbsoluteUrl && !isLocalHost) {
+    return "/api/contact";
+  }
+
+  return configuredUrl;
+}
+
+const contactApiUrl = getContactApiUrl();
 
 function useActiveSection(ids) {
   const [activeSection, setActiveSection] = useState(ids[0]);
@@ -244,17 +266,38 @@ export default function App() {
       setLocationStatus("Live visitor location shared by browser permission.");
     };
 
-    const error = () => {
+    const failGracefully = () => {
       setLocationStatus(
         "Visitor location is unavailable until location permission is allowed."
       );
     };
 
-    navigator.geolocation.getCurrentPosition(success, error, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 300000,
-    });
+    const readLocation = () => {
+      navigator.geolocation.getCurrentPosition(success, failGracefully, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 300000,
+      });
+    };
+
+    if (!("permissions" in navigator) || !navigator.permissions?.query) {
+      failGracefully();
+      return;
+    }
+
+    navigator.permissions
+      .query({ name: "geolocation" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          readLocation();
+          return;
+        }
+
+        failGracefully();
+      })
+      .catch(() => {
+        failGracefully();
+      });
   }, []);
 
   useEffect(() => {
@@ -344,10 +387,11 @@ export default function App() {
         type: "success",
         message: "Message sent, check your email.",
       });
-    } catch {
+    } catch (error) {
       setToast({
         type: "error",
-        message: "Failed to send message. Please try again.",
+        message:
+          error?.message || "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
