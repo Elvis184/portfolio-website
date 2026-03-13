@@ -88,8 +88,8 @@ export default function InfiniteIconScroll() {
       onFocusCapture={() => setSpeed(HOVER_SPEED)}
       onBlurCapture={() => setSpeed(FAST_SPEED)}
     >
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white via-white/80 to-transparent sm:w-20" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white via-white/80 to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent sm:w-20" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-slate-950 via-slate-950/80 to-transparent sm:w-20" />
 
       <motion.div
         ref={trackRef}
@@ -102,14 +102,14 @@ export default function InfiniteIconScroll() {
           return (
             <motion.article
               key={`${item.name}-${index}`}
-              className="flex min-w-[160px] items-center gap-3 rounded-3xl border border-slate-200/70 bg-white/85 px-5 py-4 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.28)] backdrop-blur md:min-w-[200px] md:px-6 md:py-5"
+              className="flex min-w-[160px] items-center gap-3 rounded-3xl border border-white/10 bg-[rgba(30,41,59,0.72)] px-5 py-4 text-slate-100 shadow-[0_18px_40px_-28px_rgba(2,6,23,0.6)] backdrop-blur md:min-w-[200px] md:px-6 md:py-5"
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-100 md:h-14 md:w-14">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900/80 md:h-14 md:w-14">
                 <Icon className={`text-2xl md:text-[1.75rem] ${item.iconClass}`} />
               </span>
-              <span className="text-lg font-semibold tracking-tight text-slate-900 md:text-xl">
+              <span className="text-lg font-semibold tracking-tight text-slate-100 md:text-xl">
                 {item.name}
               </span>
             </motion.article>
