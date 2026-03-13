@@ -20,7 +20,7 @@ import {
 
 const AboutAnimated = lazy(() => import("./AboutAnimated"));
 const InfiniteIconScroll = lazy(() => import("./components/InfiniteIconScroll"));
-const navbarLogoSrc = "/images/elvion-logo.png";
+const navbarLogoSrc = "/images/logo-icon.png";
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
@@ -422,8 +422,7 @@ export default function App() {
               )}
             </span>
             <span className="brand-copy">
-              <strong>Elvion Tech</strong>
-              <small>Digital Product Studio</small>
+              <strong>ELVION</strong>
             </span>
           </a>
           <button
