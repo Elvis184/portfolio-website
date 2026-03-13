@@ -422,8 +422,8 @@ export default function App() {
               )}
             </span>
             <span className="brand-copy">
-              <strong>Elvis Carter</strong>
-              <small>Elvion Tech</small>
+              <strong>Elvion Tech</strong>
+              <small>Digital Product Studio</small>
             </span>
           </a>
           <button
