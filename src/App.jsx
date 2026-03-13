@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import AboutAnimated from "./AboutAnimated";
-import InfiniteIconScroll from "./components/InfiniteIconScroll";
+import { Suspense, lazy, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
+  FiArrowRight,
   FiBriefcase,
   FiCheckCircle,
+  FiExternalLink,
   FiFacebook,
-  FiXCircle,
+  FiGithub,
   FiHome,
   FiInstagram,
   FiLayers,
@@ -14,7 +15,11 @@ import {
   FiSend,
   FiTool,
   FiUser,
+  FiXCircle,
 } from "react-icons/fi";
+
+const AboutAnimated = lazy(() => import("./AboutAnimated"));
+const InfiniteIconScroll = lazy(() => import("./components/InfiniteIconScroll"));
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
@@ -25,6 +30,8 @@ const navItems = [
   { id: "contact", label: "Contact", icon: FiMail },
 ];
 
+const heroBadges = ["React", "JavaScript", "Firebase", "APIs", "Responsive UI"];
+
 const stats = [
   { value: "24+", label: "Completed builds" },
   { value: "5+", label: "Years improving UI quality" },
@@ -32,21 +39,18 @@ const stats = [
   { value: "99%", label: "Mobile-first delivery focus" },
 ];
 
-const skills = [
+const skillGroups = [
   {
-    title: "HTML & CSS",
-    value: 95,
-    text: "Structured layouts, modern CSS systems, responsive delivery.",
+    title: "Frontend",
+    items: ["HTML & CSS", "JavaScript", "React", "Tailwind CSS"],
   },
   {
-    title: "JavaScript",
-    value: 90,
-    text: "Interactive interfaces, UI behavior, and lean frontend logic.",
+    title: "Backend",
+    items: ["Firebase", "API Integration", "Authentication", "Data Flows"],
   },
   {
-    title: "React",
-    value: 88,
-    text: "Reusable components, app structure, and polished SPA flows.",
+    title: "Workflow",
+    items: ["UI Systems", "Responsive Delivery", "Accessibility", "Performance"],
   },
 ];
 
@@ -82,24 +86,40 @@ const services = [
 
 const projects = [
   {
-    className: "project-card project-tall",
     tag: "Brand Website",
     title: "Creative Studio Launch",
+    description:
+      "A polished launch experience focused on visual storytelling, strong hierarchy, and conversion-ready presentation.",
+    stack: ["React", "UI Design", "Responsive"],
+    repoUrl: "https://github.com/elvis184",
+    liveUrl: null,
   },
   {
-    className: "project-card project-amber",
     tag: "SaaS",
     title: "Analytics Dashboard UI",
+    description:
+      "A clean dashboard direction built around clarity, fast scanning, and confident product communication.",
+    stack: ["React", "Data UI", "Component System"],
+    repoUrl: "https://github.com/elvis184",
+    liveUrl: null,
   },
   {
-    className: "project-card project-slate",
     tag: "E-commerce",
     title: "Modern Storefront Experience",
+    description:
+      "A premium storefront concept with streamlined navigation, stronger card hierarchy, and mobile-first polish.",
+    stack: ["Frontend", "Responsive", "UX"],
+    repoUrl: "https://github.com/elvis184",
+    liveUrl: null,
   },
   {
-    className: "project-card project-olive",
     tag: "Personal Brand",
     title: "Consultant Portfolio Redesign",
+    description:
+      "A modern portfolio refresh designed to elevate credibility, readability, and first-contact impact.",
+    stack: ["Portfolio", "Branding", "Frontend"],
+    repoUrl: "https://github.com/elvis184",
+    liveUrl: null,
   },
 ];
 
@@ -110,6 +130,11 @@ const profile = {
   phoneHref: "tel:0761354537",
   emailHref: "mailto:info.elviontech@gmail.com",
   socialLinks: [
+    {
+      name: "GitHub",
+      href: "https://github.com/elvis184",
+      icon: FiGithub,
+    },
     {
       name: "WhatsApp",
       href: "https://api.whatsapp.com/send?phone=255761354537&text=Hello%20I%20want%20more%20information",
@@ -134,7 +159,25 @@ const profile = {
 };
 
 const sectionIds = navItems.map((item) => item.id);
-const heroWords = ["Frontend", "Websites", "Interfaces", "Experiences"];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
+
+const staggerParent = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.04,
+    },
+  },
+};
 
 function getContactApiUrl() {
   const configuredUrl = import.meta.env.VITE_CONTACT_API_URL;
@@ -182,8 +225,8 @@ function useActiveSection(ids) {
         }
       },
       {
-        threshold: [0.25, 0.45, 0.65],
-        rootMargin: "-18% 0px -35% 0px",
+        threshold: [0.2, 0.4, 0.6],
+        rootMargin: "-12% 0px -40% 0px",
       }
     );
 
@@ -200,56 +243,14 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [year, setYear] = useState("");
   const [locationStatus, setLocationStatus] = useState(
-    "Requesting visitor location permission..."
+    "Visitor location is unavailable until location permission is allowed."
   );
   const [visitorLocation, setVisitorLocation] = useState(null);
-  const [typedWord, setTypedWord] = useState("");
   const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
     setYear(String(new Date().getFullYear()));
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTypedWord(heroWords[0]);
-      return undefined;
-    }
-
-    let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    let timeoutId;
-
-    const tick = () => {
-      const currentWord = heroWords[wordIndex];
-
-      if (deleting) {
-        charIndex -= 1;
-      } else {
-        charIndex += 1;
-      }
-
-      setTypedWord(currentWord.slice(0, charIndex));
-
-      if (!deleting && charIndex === currentWord.length) {
-        deleting = true;
-        timeoutId = window.setTimeout(tick, 1100);
-        return;
-      }
-
-      if (deleting && charIndex === 0) {
-        deleting = false;
-        wordIndex = (wordIndex + 1) % heroWords.length;
-      }
-
-      timeoutId = window.setTimeout(tick, deleting ? 70 : 110);
-    };
-
-    timeoutId = window.setTimeout(tick, 500);
-
-    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -390,8 +391,7 @@ export default function App() {
     } catch (error) {
       setToast({
         type: "error",
-        message:
-          error?.message || "Failed to send message. Please try again.",
+        message: error?.message || "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -411,7 +411,6 @@ export default function App() {
           </a>
           <button
             className="menu-btn"
-            id="menuBtn"
             type="button"
             aria-label="Open menu"
             aria-expanded={menuOpen}
@@ -439,94 +438,139 @@ export default function App() {
 
       <main>
         <section className="hero" id="home">
+          <div className="hero-glow hero-glow-one" aria-hidden="true"></div>
+          <div className="hero-glow hero-glow-two" aria-hidden="true"></div>
           <div className="hero-shell container">
-            <div className="hero-copy animate-slideUp">
-              <p className="eyebrow">Hello, this is Elvis</p>
-              <h1>
-                Creative{" "}
-                <span className="hero-typed" aria-hidden="true">
-                  {typedWord || "\u00A0"}
-                </span>
-                <span className="sr-only">Frontend</span>
-                <br />
-                Developer &amp; Digital Builder
-              </h1>
-              <p className="hero-text">
-                I design polished interfaces, build fast web experiences, and
-                turn product ideas into launch-ready websites.
-              </p>
-              <div className="hero-actions">
-                <a className="btn btn-solid" href="#contact">
-                  Hire Me
-                </a>
-                <a className="btn btn-outline" href="#projects">
-                  See Projects
-                </a>
-              </div>
-              <dl className="hero-meta">
-                <div>
-                  <dt>Based in</dt>
-                  <dd>Dar es Salaam</dd>
-                </div>
-                <div>
-                  <dt>Specialty</dt>
-                  <dd>Modern portfolio &amp; business sites</dd>
-                </div>
-              </dl>
-            </div>
+            <div className="hero-grid">
+              <motion.div
+                className="hero-copy"
+                variants={staggerParent}
+                initial="hidden"
+                animate="show"
+              >
+                <motion.p className="eyebrow" variants={fadeUp}>
+                  Full Stack Developer
+                </motion.p>
+                <motion.h1 variants={fadeUp}>
+                  Building modern, scalable{" "}
+                  <span className="hero-accent">web experiences</span>
+                </motion.h1>
+                <motion.p className="hero-text" variants={fadeUp}>
+                  I&apos;m <strong>{profile.name}</strong>, a developer based in
+                  Tanzania focused on clean frontend systems, polished interfaces,
+                  and launch-ready product experiences for brands, founders, and
+                  teams.
+                </motion.p>
 
+                <motion.div className="hero-actions" variants={fadeUp}>
+                  <a className="btn btn-solid" href="#projects">
+                    View Projects
+                  </a>
+                  <a className="btn btn-outline" href="#contact">
+                    Contact Me
+                  </a>
+                </motion.div>
+
+                <motion.div className="hero-badges" variants={fadeUp}>
+                  {heroBadges.map((badge) => (
+                    <span key={badge} className="hero-badge">
+                      {badge}
+                    </span>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              <motion.aside
+                className="hero-panel"
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.16 }}
+              >
+                <p className="hero-panel-label">Currently working with</p>
+                <div className="hero-panel-stack">
+                  <span>React</span>
+                  <span>JavaScript</span>
+                  <span>Tailwind CSS</span>
+                  <span>Firebase</span>
+                </div>
+                <div className="hero-panel-meta">
+                  <div>
+                    <span>Based in</span>
+                    <strong>Dar es Salaam</strong>
+                  </div>
+                  <div>
+                    <span>Focus</span>
+                    <strong>Premium frontend systems</strong>
+                  </div>
+                </div>
+              </motion.aside>
+            </div>
           </div>
         </section>
 
-        <section className="stats container" aria-label="Portfolio highlights">
+        <motion.section
+          className="stats container"
+          aria-label="Portfolio highlights"
+          variants={staggerParent}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
+        >
           {stats.map((stat) => (
-            <article className="stat-card" key={stat.label}>
+            <motion.article className="stat-card" key={stat.label} variants={fadeUp}>
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
-            </article>
+            </motion.article>
           ))}
-        </section>
+        </motion.section>
 
         <section className="section trust-section" aria-labelledby="trust-title">
           <div className="container">
-            <div className="trust-heading">
-              <h2 id="trust-title">Built with platforms modern teams trust</h2>
-              <div className="trust-divider" aria-hidden="true"></div>
+            <div className="section-heading centered compact">
+              <p className="section-kicker">Currently Working With</p>
+              <h2 id="trust-title">Platforms modern teams already trust</h2>
             </div>
-
-            <InfiniteIconScroll />
+            <Suspense fallback={<div className="section-fallback section-fallback-marquee" />}>
+              <InfiniteIconScroll />
+            </Suspense>
           </div>
         </section>
 
-        <AboutAnimated />
+        <Suspense fallback={<div className="section-fallback section-fallback-about container" />}>
+          <AboutAnimated />
+        </Suspense>
 
         <section className="section skills-section" id="skills">
           <div className="container">
             <div className="section-heading centered">
               <p className="section-kicker">Skills</p>
-              <h2>What I Use To Build</h2>
+              <h2>Clean systems, modern tooling, practical delivery</h2>
               <p>
-                A practical stack for clean interfaces, maintainable code, and
-                production-ready delivery.
+                A focused stack for product UI, responsive websites, and
+                maintainable frontend work.
               </p>
             </div>
 
-            <div className="skill-circles">
-              {skills.map((skill) => (
-                <article className="skill-card" key={skill.title}>
-                  <div
-                    className="skill-ring"
-                    style={{ "--value": skill.value }}
-                  >
-                    <div className="skill-ring-inner">
-                      <strong>{skill.value}%</strong>
-                    </div>
+            <motion.div
+              className="skills-groups"
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              {skillGroups.map((group) => (
+                <motion.article className="skill-group-card" key={group.title} variants={fadeUp}>
+                  <h3>{group.title}</h3>
+                  <div className="skill-pills">
+                    {group.items.map((item) => (
+                      <span className="skill-pill" key={item}>
+                        {item}
+                      </span>
+                    ))}
                   </div>
-                  <h3>{skill.title}</h3>
-                  <p>{skill.text}</p>
-                </article>
+                </motion.article>
               ))}
-            </div>
+            </motion.div>
 
             <div className="bars-grid">
               {bars.map((bar) => (
@@ -551,29 +595,35 @@ export default function App() {
           <div className="container">
             <div className="section-heading centered">
               <p className="section-kicker">Services</p>
-              <h2>What I Can Do For You</h2>
+              <h2>Frontend-focused work with clear product value</h2>
               <p>
-                Clear offers focused on websites that look better and convert
-                better.
+                Services shaped around clarity, premium presentation, and
+                reliable execution.
               </p>
             </div>
 
-            <div className="services-grid">
+            <motion.div
+              className="services-grid"
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               {services.map((service) => (
-                <article className="service-card" key={service.id}>
+                <motion.article className="service-card" key={service.id} variants={fadeUp}>
                   <div className="service-icon">{service.id}</div>
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
-                </article>
+                </motion.article>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         <section className="section cta-section">
           <div className="container cta-card">
             <div>
-              <p className="section-kicker">Let's Build</p>
+              <p className="section-kicker">Let&apos;s Build</p>
               <h2>Have a project in mind?</h2>
               <p>
                 I can help redesign your current website or build a fresh one
@@ -581,7 +631,7 @@ export default function App() {
               </p>
             </div>
             <a className="btn btn-light" href="#contact">
-              Start a Project
+              Contact Me
             </a>
           </div>
         </section>
@@ -590,34 +640,88 @@ export default function App() {
           <div className="container">
             <div className="section-heading centered">
               <p className="section-kicker">Projects</p>
-              <h2>Selected Work</h2>
+              <h2>Selected work with a sharper product presentation</h2>
               <p>
-                A project gallery styled to match the reference direction,
-                adapted into a cleaner modern portfolio.
+                A cleaner project grid with stronger hierarchy, clearer stack
+                tags, and more polished card interactions.
               </p>
             </div>
 
-            <div className="projects-grid">
+            <motion.div
+              className="projects-grid"
+              variants={staggerParent}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+            >
               {projects.map((project) => (
-                <article className={project.className} key={project.title}>
-                  <div className="project-overlay">
+                <motion.article className="project-card" key={project.title} variants={fadeUp}>
+                  <div className="project-topline">
                     <span>{project.tag}</span>
-                    <h3>{project.title}</h3>
                   </div>
-                </article>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="project-stack">
+                    {project.stack.map((item) => (
+                      <span className="project-chip" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="project-actions">
+                    {project.repoUrl ? (
+                      <a
+                        className="project-link"
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FiGithub aria-hidden="true" />
+                        GitHub
+                      </a>
+                    ) : (
+                      <span className="project-link project-link-disabled">
+                        <FiGithub aria-hidden="true" />
+                        GitHub
+                      </span>
+                    )}
+                    {project.liveUrl ? (
+                      <a
+                        className="project-link project-link-primary"
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FiExternalLink aria-hidden="true" />
+                        Live Demo
+                      </a>
+                    ) : (
+                      <span className="project-link project-link-primary project-link-disabled">
+                        <FiArrowRight aria-hidden="true" />
+                        Live Demo
+                      </span>
+                    )}
+                  </div>
+                </motion.article>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         <section className="section contact-section" id="contact">
           <div className="container contact-layout">
-            <div className="contact-copy">
+            <motion.div
+              className="contact-copy"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <p className="section-kicker">Contact</p>
-              <h2>Have a Project?</h2>
+              <h2>Let&apos;s talk about your next build</h2>
               <p>
-                Send a message with your website goals, and I'll help shape the
-                right layout, styling direction, and build plan.
+                Send a message with your website goals, and I&apos;ll help shape
+                the right layout, styling direction, and build plan.
               </p>
 
               <div className="contact-details">
@@ -657,9 +761,17 @@ export default function App() {
                   ></iframe>
                 ) : null}
               </div>
-            </div>
+            </motion.div>
 
-            <form className="contact-form" onSubmit={handleSubmit} aria-busy={isSubmitting}>
+            <motion.form
+              className="contact-form"
+              onSubmit={handleSubmit}
+              aria-busy={isSubmitting}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <div className="field-row">
                 <input
                   type="text"
@@ -703,7 +815,7 @@ export default function App() {
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
-            </form>
+            </motion.form>
           </div>
         </section>
 
@@ -762,23 +874,19 @@ export default function App() {
       <footer className="site-footer">
         <div className="container footer-layout">
           <div className="footer-column footer-column-main">
-            <a
-              className="brand footer-brand"
-              href="#home"
-              onClick={handleNavClick}
-            >
+            <a className="brand footer-brand" href="#home" onClick={handleNavClick}>
               Elvis<span>.</span>
             </a>
             <h3>Elvis Carter</h3>
             <span className="footer-rule" aria-hidden="true"></span>
             <p className="footer-text">
-              Portfolio websites and frontend experiences designed to look sharp
-              and ship cleanly.
+              Full stack developer crafting polished websites and dependable user
+              experiences with a premium frontend standard.
             </p>
           </div>
 
           <div className="footer-column">
-            <h3>Products</h3>
+            <h3>Services</h3>
             <span className="footer-rule" aria-hidden="true"></span>
             <div className="footer-links-list">
               <a href="#services">Portfolio Websites</a>
@@ -789,7 +897,7 @@ export default function App() {
           </div>
 
           <div className="footer-column">
-            <h3>Useful Links</h3>
+            <h3>Navigation</h3>
             <span className="footer-rule" aria-hidden="true"></span>
             <div className="footer-links-list">
               <a href="#about">About</a>
@@ -800,7 +908,7 @@ export default function App() {
           </div>
 
           <div className="footer-column">
-            <h3>Contact</h3>
+            <h3>Connect</h3>
             <span className="footer-rule" aria-hidden="true"></span>
             <div className="footer-contact-list">
               <p>{profile.name}</p>
@@ -828,7 +936,8 @@ export default function App() {
 
         <div className="container footer-bottom">
           <p className="footer-copy">
-            &copy; <span>{year}</span> Elvis Carter. All rights reserved.
+            &copy; <span>{year}</span> Elvis Carter. Designed to feel clean,
+            modern, and recruiter-ready.
           </p>
         </div>
       </footer>

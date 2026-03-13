@@ -134,7 +134,7 @@ export default function Contact() {
               name="email"
               type="email"
               className="input-base"
-              placeholder="you@example.com"
+              placeholder="name@email.com"
               maxLength="254"
               value={formData.email}
               onChange={updateField}
