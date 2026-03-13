@@ -20,6 +20,7 @@ import {
 
 const AboutAnimated = lazy(() => import("./AboutAnimated"));
 const InfiniteIconScroll = lazy(() => import("./components/InfiniteIconScroll"));
+const navbarLogoSrc = "/images/elvion-logo.png";
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
@@ -240,6 +241,7 @@ function useActiveSection(ids) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [logoAvailable, setLogoAvailable] = useState(true);
   const [toast, setToast] = useState(null);
   const [year, setYear] = useState("");
   const [locationStatus, setLocationStatus] = useState(
@@ -407,7 +409,22 @@ export default function App() {
       <header className="site-header">
         <nav className="nav container">
           <a className="brand" href="#home" onClick={handleNavClick}>
-            Elvis<span>.</span>
+            <span className="brand-badge" aria-hidden="true">
+              {logoAvailable ? (
+                <img
+                  className="brand-logo"
+                  src={navbarLogoSrc}
+                  alt=""
+                  onError={() => setLogoAvailable(false)}
+                />
+              ) : (
+                <span className="brand-fallback">E</span>
+              )}
+            </span>
+            <span className="brand-copy">
+              <strong>Elvis Carter</strong>
+              <small>Elvion Tech</small>
+            </span>
           </a>
           <button
             className="menu-btn"
