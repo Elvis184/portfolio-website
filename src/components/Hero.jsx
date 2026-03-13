@@ -18,10 +18,10 @@ export default function Hero() {
             Full Stack Developer
           </p>
           <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-6xl">
-            Alex Carter
+            Elvis Carter
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base text-slate-300 sm:text-lg">
-            I build fast, scalable, and beautiful web applications.
+            I build fast, scalable, and beautiful web applications for modern brands and digital products.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

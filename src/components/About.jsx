@@ -48,11 +48,11 @@ export default function About() {
           <div className="mb-8 flex items-center gap-4">
             <div className="avatar-ring">
               <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-electric to-violet text-2xl font-bold text-white">
-                AC
+                EC
               </div>
             </div>
             <div>
-              <h3 className="font-display text-xl text-white">Alex Carter</h3>
+              <h3 className="font-display text-xl text-white">Elvis Carter</h3>
               <p className="text-sm text-slate-300">Full Stack Developer</p>
             </div>
           </div>

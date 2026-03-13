@@ -49,7 +49,7 @@ export default function Navbar({ activeSection, darkMode, onToggleTheme }) {
             onClick={() => jumpTo("hero")}
             className="font-display text-lg font-semibold tracking-wide text-white"
           >
-            Alex<span className="text-electric">.dev</span>
+            ELVION<span className="text-electric">.tech</span>
           </button>
 
           <nav className="hidden items-center gap-2 lg:flex">

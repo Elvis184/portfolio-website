@@ -6,7 +6,7 @@ const testimonials = [
     name: "Olivia Grant",
     role: "Product Manager, SaaS Startup",
     quote:
-      "Alex combines clean engineering with strong product thinking. Delivery speed and code quality were both excellent.",
+      "Elvis combines clean engineering with strong product thinking. Delivery speed and code quality were both excellent.",
   },
   {
     name: "Daniel Kim",
@@ -18,7 +18,7 @@ const testimonials = [
     name: "Nora Hassan",
     role: "Design Lead",
     quote:
-      "From component architecture to final polish, Alex translated design intent into a robust, scalable frontend system.",
+      "From component architecture to final polish, Elvis translated design intent into a robust, scalable frontend system.",
   },
 ];
 
