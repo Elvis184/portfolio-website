@@ -17,10 +17,10 @@ import {
   FiUser,
   FiXCircle,
 } from "react-icons/fi";
+import navbarLogoSrc from "../images/ChatGPT Image Mar 13, 2026, 03_44_44 PM.png";
 
 const AboutAnimated = lazy(() => import("./AboutAnimated"));
 const InfiniteIconScroll = lazy(() => import("./components/InfiniteIconScroll"));
-const navbarLogoSrc = "/images/logo-icon.png";
 
 const navItems = [
   { id: "home", label: "Home", icon: FiHome },
