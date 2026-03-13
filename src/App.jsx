@@ -204,41 +204,15 @@ export default function App() {
         <div className="dev-orb dev-orb-one"></div>
         <div className="dev-orb dev-orb-two"></div>
         <div className="dev-card dev-card-one">
-          <div className="dev-card-topbar">
-            <span className="dev-card-traffic">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            <span className="dev-card-title">hero.tsx</span>
-          </div>
-          <span className="dev-card-code dev-card-prompt">
-            <span className="dev-token-keyword">const</span> hero = {"{"}
-          </span>
-          <span className="dev-card-code">
-            &nbsp;&nbsp;<span className="dev-token-prop">headline</span>:
-            <span className="dev-token-string"> "Launch faster"</span>,
-          </span>
-          <span className="dev-card-code">
-            &nbsp;&nbsp;<span className="dev-token-prop">cta</span>:
-            <span className="dev-token-string"> "Start free"</span>
-          </span>
-          <span className="dev-card-code dev-token-muted">{"}"}</span>
+          <span className="dev-card-code">&lt;section className="hero"&gt;</span>
+          <span className="dev-card-dot"></span>
+          <span className="dev-card-line dev-card-line-short"></span>
+          <span className="dev-card-line"></span>
+          <span className="dev-card-line dev-card-line-accent"></span>
         </div>
         <div className="dev-card dev-card-two">
-          <div className="dev-card-topbar">
-            <span className="dev-card-traffic">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            <span className="dev-card-title">api.log</span>
-          </div>
           <span className="dev-card-chip">API</span>
-          <span className="dev-card-code">
-            <span className="dev-token-keyword">GET</span>
-            <span className="dev-token-string"> /metrics/growth</span>
-          </span>
+          <span className="dev-card-code">const metrics = await fetch("/growth")</span>
           <span className="dev-card-line"></span>
           <span className="dev-card-line dev-card-line-short"></span>
           <span className="dev-card-line dev-card-line-accent"></span>

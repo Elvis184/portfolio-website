@@ -147,13 +147,6 @@ button {
   backdrop-filter: blur(10px);
 }
 
-.dev-card-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
 .dev-card-one {
   top: 19%;
   right: 8%;
@@ -168,37 +161,12 @@ button {
   animation: cardFloatTwo 20s ease-in-out infinite;
 }
 
-.dev-card-traffic {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.dev-card-traffic span {
-  width: 8px;
-  height: 8px;
+.dev-card-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
-  background: rgba(248, 250, 252, 0.16);
-}
-
-.dev-card-traffic span:nth-child(1) {
-  background: rgba(248, 113, 113, 0.85);
-}
-
-.dev-card-traffic span:nth-child(2) {
-  background: rgba(250, 204, 21, 0.85);
-}
-
-.dev-card-traffic span:nth-child(3) {
-  background: rgba(74, 222, 128, 0.82);
-}
-
-.dev-card-title {
-  color: rgba(148, 163, 184, 0.82);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
 }
 
 .dev-card-chip {
@@ -219,35 +187,13 @@ button {
 
 .dev-card-code {
   color: rgba(148, 163, 184, 0.92);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 0.74rem;
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-size: 0.76rem;
   line-height: 1.5;
   letter-spacing: 0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.dev-card-prompt::before {
-  content: ">";
-  margin-right: 0.55rem;
-  color: rgba(34, 211, 238, 0.9);
-}
-
-.dev-token-keyword {
-  color: rgba(96, 165, 250, 0.96);
-}
-
-.dev-token-prop {
-  color: rgba(248, 250, 252, 0.94);
-}
-
-.dev-token-string {
-  color: rgba(74, 222, 128, 0.9);
-}
-
-.dev-token-muted {
-  color: rgba(148, 163, 184, 0.72);
 }
 
 .dev-card-line {
