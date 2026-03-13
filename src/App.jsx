@@ -17,7 +17,7 @@ import {
   FiUser,
   FiXCircle,
 } from "react-icons/fi";
-import navbarLogoSrc from "../images/ChatGPT Image Mar 13, 2026, 03_44_44 PM.png";
+import navbarLogoSrc from "../images/logo-icon-optimized.png";
 
 const AboutAnimated = lazy(() => import("./AboutAnimated"));
 const InfiniteIconScroll = lazy(() => import("./components/InfiniteIconScroll"));
