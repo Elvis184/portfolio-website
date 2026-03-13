@@ -105,10 +105,10 @@ const projects = [
 
 const profile = {
   name: "Elvis Carter",
-  email: "machaelvice8@gmail.com",
+  email: "info.elviontech@gmail.com",
   phone: "0761354537",
   phoneHref: "tel:0761354537",
-  emailHref: "mailto:machaelvice8@gmail.com",
+  emailHref: "mailto:info.elviontech@gmail.com",
   socialLinks: [
     {
       name: "WhatsApp",

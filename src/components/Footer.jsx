@@ -20,7 +20,7 @@ export default function Footer() {
           </a>
         </div>
         <div className="flex gap-3">
-          <a href="mailto:alex@example.com" className="hover:text-white">
+          <a href="mailto:info.elviontech@gmail.com" className="hover:text-white">
             <Mail size={18} />
           </a>
           <a href="https://github.com/" target="_blank" rel="noreferrer" className="hover:text-white">
