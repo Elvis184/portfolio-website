@@ -70,6 +70,228 @@ button {
   min-height: 100vh;
 }
 
+.landing-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.dev-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+.dev-grid-plane,
+.dev-orb,
+.dev-card,
+.dev-ring {
+  position: absolute;
+}
+
+.dev-grid-plane {
+  left: 50%;
+  bottom: -22vh;
+  width: 170vw;
+  height: 72vh;
+  transform: translateX(-50%) rotateX(74deg);
+  transform-origin: center;
+  background:
+    linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent 86%);
+  opacity: 0.3;
+}
+
+.dev-orb {
+  border-radius: 999px;
+  filter: blur(28px);
+  opacity: 0.5;
+}
+
+.dev-orb-one {
+  top: 16%;
+  right: 10%;
+  width: min(26vw, 320px);
+  height: min(26vw, 320px);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.28), transparent 70%);
+  animation: orbFloat 14s ease-in-out infinite;
+}
+
+.dev-orb-two {
+  top: 42%;
+  left: 7%;
+  width: min(18vw, 220px);
+  height: min(18vw, 220px);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.2), transparent 72%);
+  animation: orbFloat 18s ease-in-out infinite reverse;
+}
+
+.dev-card {
+  width: min(26vw, 320px);
+  max-width: calc(100vw - 48px);
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(16, 27, 47, 0.8), rgba(10, 18, 32, 0.64)),
+    rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 20px 56px rgba(2, 6, 23, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.dev-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dev-card-one {
+  top: 19%;
+  right: 8%;
+  transform: rotateY(-26deg) rotateX(12deg);
+  animation: cardFloatOne 16s ease-in-out infinite;
+}
+
+.dev-card-two {
+  top: 58%;
+  left: 5%;
+  transform: rotateY(24deg) rotateX(14deg);
+  animation: cardFloatTwo 20s ease-in-out infinite;
+}
+
+.dev-card-traffic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dev-card-traffic span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.16);
+}
+
+.dev-card-traffic span:nth-child(1) {
+  background: rgba(248, 113, 113, 0.85);
+}
+
+.dev-card-traffic span:nth-child(2) {
+  background: rgba(250, 204, 21, 0.85);
+}
+
+.dev-card-traffic span:nth-child(3) {
+  background: rgba(74, 222, 128, 0.82);
+}
+
+.dev-card-title {
+  color: rgba(148, 163, 184, 0.82);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dev-card-chip {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.18);
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dev-card-code {
+  color: rgba(148, 163, 184, 0.92);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dev-card-prompt::before {
+  content: ">";
+  margin-right: 0.55rem;
+  color: rgba(34, 211, 238, 0.9);
+}
+
+.dev-token-keyword {
+  color: rgba(96, 165, 250, 0.96);
+}
+
+.dev-token-prop {
+  color: rgba(248, 250, 252, 0.94);
+}
+
+.dev-token-string {
+  color: rgba(74, 222, 128, 0.9);
+}
+
+.dev-token-muted {
+  color: rgba(148, 163, 184, 0.72);
+}
+
+.dev-card-line {
+  display: block;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.22), rgba(148, 163, 184, 0.04));
+}
+
+.dev-card-line-short {
+  width: 58%;
+}
+
+.dev-card-line-accent {
+  width: 72%;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.54), rgba(34, 211, 238, 0.3));
+}
+
+.dev-ring {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.08);
+}
+
+.dev-ring-one {
+  top: 18%;
+  left: 48%;
+  width: min(36vw, 460px);
+  height: min(36vw, 460px);
+  transform: translateX(-50%) rotateX(72deg);
+  animation: spinRing 24s linear infinite;
+}
+
+.dev-ring-two {
+  top: 26%;
+  left: 52%;
+  width: min(20vw, 240px);
+  height: min(20vw, 240px);
+  transform: translateX(-50%) rotateX(72deg);
+  border-color: rgba(34, 211, 238, 0.14);
+  animation: spinRing 18s linear infinite reverse;
+}
+
 .container {
   width: min(1200px, calc(100% - clamp(32px, 8vw, 80px)));
   margin: 0 auto;
@@ -255,6 +477,7 @@ button {
 
 .hero-section {
   position: relative;
+  z-index: 1;
   padding: clamp(84px, 14vw, 160px) 0 clamp(72px, 12vw, 120px);
 }
 
@@ -734,6 +957,8 @@ button {
 }
 
 .site-footer {
+  position: relative;
+  z-index: 1;
   padding: clamp(44px, 8vw, 80px) 0 1.8rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(5, 10, 18, 0.92);
@@ -800,6 +1025,14 @@ button:focus-visible {
 }
 
 @media (max-width: 1023px) {
+  .dev-card-one {
+    right: -2%;
+  }
+
+  .dev-card-two {
+    left: -4%;
+  }
+
   .menu-btn {
     display: inline-flex;
   }
@@ -852,6 +1085,41 @@ button:focus-visible {
 }
 
 @media (max-width: 767px) {
+  .dev-grid-plane {
+    width: 220vw;
+    height: 58vh;
+    bottom: -18vh;
+    background-size: 44px 44px;
+    opacity: 0.2;
+  }
+
+  .dev-card {
+    width: min(48vw, 220px);
+    gap: 0.55rem;
+    padding: 0.8rem;
+    opacity: 0.64;
+  }
+
+  .dev-card-one {
+    top: 14%;
+    right: -8%;
+  }
+
+  .dev-card-two {
+    top: 64%;
+    left: -10%;
+  }
+
+  .dev-ring-one {
+    width: min(54vw, 280px);
+    height: min(54vw, 280px);
+  }
+
+  .dev-ring-two {
+    width: min(28vw, 150px);
+    height: min(28vw, 150px);
+  }
+
   .container {
     width: min(1200px, calc(100% - 32px));
   }
@@ -895,5 +1163,52 @@ button:focus-visible {
   .faq-item,
   .brands-shell {
     border-radius: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev-orb,
+  .dev-card,
+  .dev-ring {
+    animation: none !important;
+  }
+}
+
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.04);
+  }
+}
+
+@keyframes cardFloatOne {
+  0%,
+  100% {
+    transform: rotateY(-26deg) rotateX(12deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotateY(-18deg) rotateX(10deg) translate3d(-10px, -20px, 0);
+  }
+}
+
+@keyframes cardFloatTwo {
+  0%,
+  100% {
+    transform: rotateY(24deg) rotateX(14deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotateY(14deg) rotateX(12deg) translate3d(10px, -16px, 0);
+  }
+}
+
+@keyframes spinRing {
+  from {
+    transform: translateX(-50%) rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotateX(72deg) rotateZ(360deg);
   }
 }
