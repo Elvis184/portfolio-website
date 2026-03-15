@@ -30,42 +30,126 @@ const groups = [
   {
     title: "Frontend",
     items: [
-      { name: "HTML", icon: FaHtml5 },
-      { name: "CSS", icon: FaCss3Alt },
-      { name: "JavaScript", icon: FaJs },
-      { name: "TypeScript", icon: SiTypescript },
-      { name: "React", icon: FaReact },
-      { name: "Next.js", icon: SiNextdotjs },
-      { name: "Tailwind CSS", icon: SiTailwindcss },
+      {
+        name: "HTML",
+        icon: FaHtml5,
+        href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      },
+      {
+        name: "CSS",
+        icon: FaCss3Alt,
+        href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      },
+      {
+        name: "JavaScript",
+        icon: FaJs,
+        href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      },
+      {
+        name: "TypeScript",
+        icon: SiTypescript,
+        href: "https://www.typescriptlang.org/",
+      },
+      {
+        name: "React",
+        icon: FaReact,
+        href: "https://react.dev/",
+      },
+      {
+        name: "Next.js",
+        icon: SiNextdotjs,
+        href: "https://nextjs.org/",
+      },
+      {
+        name: "Tailwind CSS",
+        icon: SiTailwindcss,
+        href: "https://tailwindcss.com/",
+      },
     ],
   },
   {
     title: "Backend",
     items: [
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "Express.js", icon: SiExpress },
-      { name: "Laravel", icon: FaLaravel },
-      { name: "Django", icon: SiDjango },
+      {
+        name: "Node.js",
+        icon: FaNodeJs,
+        href: "https://nodejs.org/",
+      },
+      {
+        name: "Express.js",
+        icon: SiExpress,
+        href: "https://expressjs.com/",
+      },
+      {
+        name: "Laravel",
+        icon: FaLaravel,
+        href: "https://laravel.com/",
+      },
+      {
+        name: "Django",
+        icon: SiDjango,
+        href: "https://www.djangoproject.com/",
+      },
     ],
   },
   {
     title: "Database",
     items: [
-      { name: "MongoDB", icon: SiMongodb },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "MySQL", icon: SiMysql },
+      {
+        name: "MongoDB",
+        icon: SiMongodb,
+        href: "https://www.mongodb.com/",
+      },
+      {
+        name: "PostgreSQL",
+        icon: SiPostgresql,
+        href: "https://www.postgresql.org/",
+      },
+      {
+        name: "MySQL",
+        icon: SiMysql,
+        href: "https://www.mysql.com/",
+      },
     ],
   },
   {
     title: "Tools",
     items: [
-      { name: "Git", icon: FaGitAlt },
-      { name: "GitHub", icon: FaGithub },
-      { name: "Docker", icon: FaDocker },
-      { name: "Firebase", icon: SiFirebase },
-      { name: "AWS", icon: FaAws },
-      { name: "Vercel", icon: SiVercel },
-      { name: "Python", icon: FaPython },
+      {
+        name: "Git",
+        icon: FaGitAlt,
+        href: "https://git-scm.com/",
+      },
+      {
+        name: "GitHub",
+        icon: FaGithub,
+        href: "https://github.com/",
+      },
+      {
+        name: "Docker",
+        icon: FaDocker,
+        href: "https://www.docker.com/",
+      },
+      {
+        name: "Firebase",
+        icon: SiFirebase,
+        href: "https://firebase.google.com/",
+      },
+      {
+        name: "AWS",
+        icon: FaAws,
+        href: "https://aws.amazon.com/",
+      },
+      {
+        name: "Vercel",
+        icon: SiVercel,
+        href: "https://vercel.com/",
+      },
+      {
+        name: "Python",
+        icon: FaPython,
+        href: "https://www.python.org/",
+      },
     ],
   },
 ];
@@ -93,16 +177,20 @@ export default function Skills() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {group.items.map((item) => {
                 const Icon = item.icon;
+
                 return (
-                  <div
+                  <a
                     key={item.name}
-                    className="group rounded-xl border border-white/10 bg-black/25 px-3 py-3 transition hover:-translate-y-0.5 hover:border-electric/60 hover:bg-electric/10"
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group rounded-xl border border-white/10 bg-black/25 px-3 py-3 transition hover:-translate-y-0.5 hover:border-electric/60 hover:bg-electric/10 focus:outline-none focus:ring-2 focus:ring-electric/30"
                   >
                     <div className="flex items-center gap-2">
                       <Icon className="text-electric transition group-hover:text-cyan" />
                       <p className="text-sm text-slate-200">{item.name}</p>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
