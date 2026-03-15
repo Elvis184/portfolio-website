@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { useMemo, useState } from "react";
 import SectionTitle from "./SectionTitle";
+import novaCartImage from "../../images/ChatGPT Image Mar 15, 2026, 08_48_09 PM.png";
 
 const filters = ["All", "SaaS", "E-commerce", "Productivity", "Social"];
 
@@ -12,7 +13,7 @@ const projects = [
       "A full-stack e-commerce platform with personalized recommendations, role-based admin, and analytics.",
     category: "E-commerce",
     stack: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    image: "https://example.com/images/novacart.png",
+    image: novaCartImage,
   },
   {
     title: "Flowboard Pro",
