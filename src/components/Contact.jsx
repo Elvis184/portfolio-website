@@ -11,7 +11,28 @@ const INITIAL_FORM = {
   company: "",
 };
 
-const API_URL = import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
+function getContactApiUrl() {
+  const configuredUrl = import.meta.env.VITE_CONTACT_API_URL;
+
+  if (!configuredUrl) {
+    return "/api/contact";
+  }
+
+  const isLocalAbsoluteUrl = /^https?:\/\/(localhost|127\.0\.0\.1)/i.test(
+    configuredUrl
+  );
+  const isLocalHost =
+    typeof window !== "undefined" &&
+    /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+
+  if (isLocalAbsoluteUrl && !isLocalHost) {
+    return "/api/contact";
+  }
+
+  return configuredUrl;
+}
+
+const API_URL = getContactApiUrl();
 
 function getFormStartedAt() {
   return Date.now();
@@ -206,7 +227,7 @@ export default function Contact() {
           </p>
           <div className="mt-5 space-y-3 text-sm text-slate-200">
             <p>Email: info.elviontech@gmail.com</p>
-            <p>GitHub: github.com/elviontech</p>
+            <p>GitHub: github.com/elvis184</p>
             <p>LinkedIn: linkedin.com/in/elviontech</p>
           </div>
           <div className="mt-6 flex gap-3">
@@ -218,7 +239,7 @@ export default function Contact() {
               <Mail size={18} />
             </a>
             <a
-              href="https://github.com/elviontech"
+              href="https://github.com/elvis184"
               target="_blank"
               rel="noreferrer"
               className="rounded-xl border border-white/20 bg-white/5 p-3 text-slate-200 transition hover:border-electric/50 hover:text-electric"

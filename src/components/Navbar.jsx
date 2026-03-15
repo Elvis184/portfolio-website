@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { id: "hero", label: "Home" },
@@ -12,7 +12,7 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ];
 
-export default function Navbar({ activeSection, darkMode, onToggleTheme }) {
+export default function Navbar({ activeSection }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -69,14 +69,6 @@ export default function Navbar({ activeSection, darkMode, onToggleTheme }) {
           </nav>
 
           <div className="flex items-center gap-2">
-            <button
-              onClick={onToggleTheme}
-              aria-label="Toggle theme"
-              className="rounded-xl border border-white/20 bg-white/5 p-2 text-slate-100 transition hover:border-electric/60 hover:text-electric"
-            >
-              {darkMode ? <Sun size={17} /> : <Moon size={17} />}
-            </button>
-
             <button
               onClick={() => setOpen((state) => !state)}
               className="rounded-xl border border-white/20 bg-white/5 p-2 text-slate-100 lg:hidden"

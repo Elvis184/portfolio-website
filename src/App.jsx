@@ -60,7 +60,6 @@ function useActiveSection(ids) {
 }
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true);
   const [loading, setLoading] = useState(true);
   const activeSection = useActiveSection(sectionIds);
 
@@ -72,20 +71,12 @@ export default function App() {
     return () => window.clearTimeout(timeoutId);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
-
   return (
     <>
       <PageLoader visible={loading} />
       <ScrollProgress />
       <div className="relative overflow-hidden bg-ink text-white">
-        <Navbar
-          activeSection={activeSection}
-          darkMode={darkMode}
-          onToggleTheme={() => setDarkMode((value) => !value)}
-        />
+        <Navbar activeSection={activeSection} />
 
         <main>
           <Hero />
