@@ -3,6 +3,7 @@ import { ExternalLink, Github } from "lucide-react";
 import { useMemo, useState } from "react";
 import SectionTitle from "./SectionTitle";
 import novaCartImage from "../../images/ChatGPT Image Mar 15, 2026, 08_48_09 PM.png";
+import flowboardImage from "../../images/ChatGPT Image Mar 15, 2026, 10_42_26 PM.png";
 
 const filters = ["All", "SaaS", "E-commerce", "Productivity", "Social"];
 
@@ -21,7 +22,7 @@ const projects = [
       "A collaborative task management app with real-time updates, team workspaces, and automation rules.",
     category: "Productivity",
     stack: ["Next.js", "TypeScript", "Firebase"],
-    image: "https://example.com/images/flowboard.png",
+    image: flowboardImage,
   },
   {
     title: "Orbit Social",
