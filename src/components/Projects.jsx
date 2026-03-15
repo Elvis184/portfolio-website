@@ -12,6 +12,7 @@ const projects = [
       "A full-stack e-commerce platform with personalized recommendations, role-based admin, and analytics.",
     category: "E-commerce",
     stack: ["React", "Node.js", "PostgreSQL", "Stripe"],
+    image: "https://example.com/images/novacart.png",
   },
   {
     title: "Flowboard Pro",
@@ -19,6 +20,7 @@ const projects = [
       "A collaborative task management app with real-time updates, team workspaces, and automation rules.",
     category: "Productivity",
     stack: ["Next.js", "TypeScript", "Firebase"],
+    image: "https://example.com/images/flowboard.png",
   },
   {
     title: "Orbit Social",
@@ -26,6 +28,7 @@ const projects = [
       "A social media platform featuring live notifications, media uploads, and feed ranking.",
     category: "Social",
     stack: ["React", "Express", "MongoDB"],
+    image: "https://example.com/images/orbit.png",
   },
   {
     title: "PulseOps Dashboard",
@@ -33,6 +36,7 @@ const projects = [
       "A SaaS analytics dashboard with modular widgets, billing flows, and secure API integrations.",
     category: "SaaS",
     stack: ["Next.js", "Tailwind", "Prisma", "PostgreSQL"],
+    image: "https://example.com/images/pulseops.png",
   },
   {
     title: "Portfolio CMS Engine",
@@ -40,6 +44,7 @@ const projects = [
       "A headless CMS starter for portfolio websites with markdown editing and static site generation.",
     category: "SaaS",
     stack: ["React", "Django", "MySQL"],
+    image: "https://example.com/images/portfolio-cms.png",
   },
   {
     title: "Bookly Reserve",
@@ -47,6 +52,7 @@ const projects = [
       "A booking platform for service businesses with calendar sync, reminders, and invoice generation.",
     category: "Productivity",
     stack: ["Laravel", "Vue", "MySQL"],
+    image: "https://example.com/images/bookly.png",
   },
 ];
 
@@ -94,7 +100,12 @@ export default function Projects() {
             transition={{ delay: idx * 0.06, duration: 0.42 }}
             className="group overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-card backdrop-blur transition hover:-translate-y-1 hover:border-electric/60"
           >
-            <div className="h-40 bg-[radial-gradient(circle_at_20%_20%,rgba(45,123,255,.4),transparent_40%),radial-gradient(circle_at_90%_20%,rgba(142,91,255,.4),transparent_45%),linear-gradient(180deg,#0a1023,#050814)]" />
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              className="h-40 w-full object-cover"
+              loading="lazy"
+            />
 
             <div className="p-5">
               <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-electric">
