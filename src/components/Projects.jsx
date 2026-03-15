@@ -4,6 +4,10 @@ import { useMemo, useState } from "react";
 import SectionTitle from "./SectionTitle";
 import novaCartImage from "../../images/ChatGPT Image Mar 15, 2026, 08_48_09 PM.png";
 import flowboardImage from "../../images/ChatGPT Image Mar 15, 2026, 10_42_26 PM.png";
+import orbitSocialImage from "../../images/ChatGPT Image Mar 15, 2026, 10_54_20 PM.png";
+import pulseOpsImage from "../../images/ChatGPT Image Mar 15, 2026, 10_59_28 PM.png";
+import portfolioCmsImage from "../../images/ChatGPT Image Mar 15, 2026, 11_04_20 PM.png";
+import booklyReserveImage from "../../images/ChatGPT Image Mar 15, 2026, 11_06_07 PM.png";
 
 const filters = ["All", "SaaS", "E-commerce", "Productivity", "Social"];
 
@@ -30,7 +34,8 @@ const projects = [
       "A social media platform featuring live notifications, media uploads, and feed ranking.",
     category: "Social",
     stack: ["React", "Express", "MongoDB"],
-    image: "https://example.com/images/orbit.png",
+    image: orbitSocialImage,
+    imageClassName: "bg-white object-contain p-2",
   },
   {
     title: "PulseOps Dashboard",
@@ -38,7 +43,8 @@ const projects = [
       "A SaaS analytics dashboard with modular widgets, billing flows, and secure API integrations.",
     category: "SaaS",
     stack: ["Next.js", "Tailwind", "Prisma", "PostgreSQL"],
-    image: "https://example.com/images/pulseops.png",
+    image: pulseOpsImage,
+    imageClassName: "bg-white object-contain p-2",
   },
   {
     title: "Portfolio CMS Engine",
@@ -46,7 +52,8 @@ const projects = [
       "A headless CMS starter for portfolio websites with markdown editing and static site generation.",
     category: "SaaS",
     stack: ["React", "Django", "MySQL"],
-    image: "https://example.com/images/portfolio-cms.png",
+    image: portfolioCmsImage,
+    imageClassName: "bg-white object-contain p-2",
   },
   {
     title: "Bookly Reserve",
@@ -54,7 +61,8 @@ const projects = [
       "A booking platform for service businesses with calendar sync, reminders, and invoice generation.",
     category: "Productivity",
     stack: ["Laravel", "Vue", "MySQL"],
-    image: "https://example.com/images/bookly.png",
+    image: booklyReserveImage,
+    imageClassName: "bg-white object-contain p-2",
   },
 ];
 
@@ -105,7 +113,7 @@ export default function Projects() {
             <img
               src={project.image}
               alt={`${project.title} preview`}
-              className="h-40 w-full object-cover"
+              className={`h-40 w-full object-cover ${project.imageClassName || ""}`}
               loading="lazy"
             />
 
