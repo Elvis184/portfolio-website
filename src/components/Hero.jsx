@@ -1,8 +1,39 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import HeroTechScene from "./HeroTechScene";
 
 export default function Hero() {
+  const [sceneEnabled, setSceneEnabled] = useState(false);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lowWidth = window.innerWidth < 900;
+    if (reduceMotion || lowWidth) {
+      setSceneEnabled(false);
+      return undefined;
+    }
+
+    let timeoutId = 0;
+    let idleId = 0;
+    const activate = () => setSceneEnabled(true);
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(activate, { timeout: 380 });
+    } else {
+      timeoutId = window.setTimeout(activate, 260);
+    }
+
+    return () => {
+      if (idleId && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
   const container = {
     hidden: { opacity: 0, y: 22 },
     show: {
@@ -25,7 +56,7 @@ export default function Hero() {
     <section id="hero" className="hero-root relative overflow-hidden pt-28 sm:pt-36">
       <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_18%_20%,rgba(168,85,247,.24),transparent_35%),radial-gradient(circle_at_82%_8%,rgba(34,211,238,.22),transparent_34%),linear-gradient(180deg,#050814_0%,#0a1234_100%)]" />
       <div className="absolute inset-0 -z-20 bg-grid-pattern bg-[size:44px_44px] opacity-20" />
-      <HeroTechScene />
+      {sceneEnabled && <HeroTechScene />}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12),transparent_55%)]" />
 
       <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
@@ -49,7 +80,7 @@ export default function Hero() {
               className="hero-heading font-display text-5xl font-bold uppercase leading-[0.95] tracking-[-0.06em] text-white sm:text-7xl lg:text-[5.1rem]"
             >
               <span className="bg-[linear-gradient(120deg,#ffffff_8%,#c4b5fd_40%,#7dd3fc_84%)] bg-clip-text text-transparent">
-                MOTO DIGEE
+                ELVION TECH
               </span>
             </motion.h1>
 

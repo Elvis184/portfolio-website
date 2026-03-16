@@ -66,7 +66,7 @@ export default function App() {
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       setLoading(false);
-    }, 700);
+    }, 260);
 
     return () => window.clearTimeout(timeoutId);
   }, []);
