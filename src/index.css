@@ -136,11 +136,32 @@ body {
       0 0 0 2px rgba(5, 8, 20, 0.95),
       0 0 0 4px rgba(52, 231, 255, 0.52);
   }
+
+  .hero-tech-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: -15;
+    pointer-events: none;
+  }
+
+  .hero-subject-wrap {
+    perspective: 1100px;
+  }
+
+  .hero-subject-frame {
+    transform-style: preserve-3d;
+    animation: subjectFloat 6.8s ease-in-out infinite;
+  }
+
+  .hero-subject-image {
+    aspect-ratio: 3 / 4.8;
+    object-position: center top;
+  }
 }
 
 @media (max-width: 640px) {
   .hero-root {
-    padding-top: 7.5rem;
+    padding-top: 6.9rem;
   }
 
   .hero-panel {
@@ -166,6 +187,10 @@ body {
     gap: 0.7rem;
   }
 
+  .hero-subject-wrap {
+    max-width: 22.5rem;
+  }
+
   .hero-title-underline {
     width: min(9rem, 48vw);
   }
@@ -178,7 +203,7 @@ body {
 
 @media (max-width: 380px) {
   .hero-root {
-    padding-top: 6.8rem;
+    padding-top: 6.4rem;
   }
 
   .hero-panel {
@@ -211,6 +236,10 @@ body {
     margin-top: 2.6rem;
     gap: 1rem;
   }
+
+  .hero-subject-wrap {
+    max-width: 31rem;
+  }
 }
 
 @keyframes shimmer {
@@ -219,6 +248,18 @@ body {
   }
   100% {
     background-position: 200% 50%;
+  }
+}
+
+@keyframes subjectFloat {
+  0% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateX(1.2deg);
+  }
+  100% {
+    transform: translateY(0px) rotateX(0deg);
   }
 }
 
@@ -233,7 +274,8 @@ body {
 
   .hero-primary-button,
   .hero-secondary-button,
-  .hero-social-link {
+  .hero-social-link,
+  .hero-subject-frame {
     transition: none;
     transform: none;
   }

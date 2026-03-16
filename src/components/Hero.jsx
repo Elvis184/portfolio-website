@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import HeroTechScene from "./HeroTechScene";
 
 export default function Hero() {
   const container = {
@@ -21,85 +22,113 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="hero-root relative overflow-hidden pt-36 sm:pt-44">
-      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_20%_18%,rgba(45,123,255,.3),transparent_34%),radial-gradient(circle_at_80%_14%,rgba(142,91,255,.26),transparent_38%),radial-gradient(circle_at_50%_88%,rgba(52,231,255,.18),transparent_36%)]" />
-      <div className="absolute inset-0 -z-10 bg-grid-pattern bg-[size:44px_44px] opacity-30" />
-      <div className="absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-electric/20 blur-3xl sm:h-96 sm:w-96" />
+    <section id="hero" className="hero-root relative overflow-hidden pt-28 sm:pt-36">
+      <div className="absolute inset-0 -z-30 bg-[radial-gradient(circle_at_18%_20%,rgba(168,85,247,.24),transparent_35%),radial-gradient(circle_at_82%_8%,rgba(34,211,238,.22),transparent_34%),linear-gradient(180deg,#050814_0%,#0a1234_100%)]" />
+      <div className="absolute inset-0 -z-20 bg-grid-pattern bg-[size:44px_44px] opacity-20" />
+      <HeroTechScene />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12),transparent_55%)]" />
 
-      <div className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           animate="show"
           variants={container}
-          className="hero-panel mx-auto max-w-5xl rounded-[2rem] border border-white/15 bg-white/[0.06] p-8 text-center shadow-glow backdrop-blur-xl sm:p-12 lg:p-16"
+          className="hero-panel mx-auto grid max-w-6xl items-center gap-10 rounded-[2rem] border border-white/15 bg-white/[0.07] p-6 text-center shadow-glow backdrop-blur-xl sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-14 lg:text-left"
         >
-          <motion.p
-            variants={item}
-            className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-slate-200"
-          >
-            <span className="inline-block h-2 w-2 rounded-full bg-cyan shadow-[0_0_18px_rgba(52,231,255,0.85)]" />
-            Modern Web Solutions Studio
-          </motion.p>
-
-          <motion.h1
-            variants={item}
-            className="hero-heading font-display text-5xl font-bold uppercase leading-[0.95] tracking-[-0.06em] text-white sm:text-7xl lg:text-[5.8rem]"
-          >
-            <span className="bg-[linear-gradient(135deg,#ffffff_0%,#d7e6ff_40%,#7dd3fc_100%)] bg-clip-text text-transparent">
-              ELVION TECH
-            </span>
-          </motion.h1>
-
-          <motion.div variants={item} className="hero-title-underline mx-auto mt-6" />
-
-          <motion.p
-            variants={item}
-            className="hero-tagline mx-auto mt-7 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8"
-          >
-            A modern web solutions studio crafting fast, scalable, and polished digital experiences for ambitious brands, startups, and products.
-          </motion.p>
-
-          <motion.div variants={item} className="hero-actions-row mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#projects"
-              className="hero-primary-button"
+          <div>
+            <motion.p
+              variants={item}
+              className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-slate-100"
             >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="hero-secondary-button"
-            >
-              Start a Project
-            </a>
-          </motion.div>
+              <span className="inline-block h-2 w-2 rounded-full bg-cyan shadow-[0_0_18px_rgba(52,231,255,0.85)]" />
+              3D Creative Tech Experience
+            </motion.p>
 
-          <motion.div variants={item} className="mt-10 flex items-center justify-center gap-3">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="hero-social-link"
-              aria-label="GitHub"
+            <motion.h1
+              variants={item}
+              className="hero-heading font-display text-5xl font-bold uppercase leading-[0.95] tracking-[-0.06em] text-white sm:text-7xl lg:text-[5.1rem]"
             >
-              <Github size={18} />
-            </a>
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="hero-social-link"
-              aria-label="LinkedIn"
+              <span className="bg-[linear-gradient(120deg,#ffffff_8%,#c4b5fd_40%,#7dd3fc_84%)] bg-clip-text text-transparent">
+                MOTO DIGEE
+              </span>
+            </motion.h1>
+
+            <motion.div variants={item} className="hero-title-underline mx-auto mt-6 lg:mx-0" />
+
+            <motion.p
+              variants={item}
+              className="hero-tagline mx-auto mt-7 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg sm:leading-8 lg:mx-0"
             >
-              <Linkedin size={18} />
-            </a>
-            <a
-              href="mailto:info.elviontech@gmail.com"
-              className="hero-social-link"
-              aria-label="Email"
-            >
-              <Mail size={18} />
-            </a>
+              Build a modern web brand with immersive visuals, dynamic storytelling, and tech-powered interaction design. Scroll and hover to feel the layered parallax and rotating digital ecosystem.
+            </motion.p>
+
+            <motion.div variants={item} className="hero-actions-row mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+              <a
+                href="#projects"
+                className="hero-primary-button"
+              >
+                View Projects
+              </a>
+              <a
+                href="#contact"
+                className="hero-secondary-button"
+              >
+                Launch Your Idea
+              </a>
+            </motion.div>
+
+            <motion.div variants={item} className="mt-10 flex items-center justify-center gap-3 lg:justify-start">
+              <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-link"
+                aria-label="GitHub"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-link"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="mailto:info.elviontech@gmail.com"
+                className="hero-social-link"
+                aria-label="Email"
+              >
+                <Mail size={18} />
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div variants={item} className="hero-subject-wrap relative mx-auto w-full max-w-[28rem] lg:max-w-none">
+            <div className="absolute -left-2 top-12 rounded-full border border-cyan/40 bg-cyan/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cyan/95 shadow-[0_0_24px_rgba(34,211,238,0.34)]">
+              Cloud
+            </div>
+            <div className="absolute -right-2 top-28 rounded-full border border-violet/45 bg-violet/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-100 shadow-[0_0_24px_rgba(167,139,250,0.34)]">
+              Rocket
+            </div>
+            <div className="absolute right-6 bottom-14 rounded-full border border-fuchsia-300/40 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-fuchsia-100 shadow-[0_0_20px_rgba(232,121,249,0.32)]">
+              Gear
+            </div>
+
+            <div className="hero-subject-frame relative overflow-hidden rounded-[1.75rem] border border-white/20 bg-white/[0.06] p-2 shadow-[0_24px_70px_-30px_rgba(0,0,0,0.95)]">
+              <img
+                src="/images/moto-digee-hero.png"
+                alt="Confident MOTO DIGEE creator holding a camera"
+                className="hero-subject-image h-auto w-full rounded-[1.45rem] object-cover"
+                width="768"
+                height="1344"
+                decoding="async"
+                fetchPriority="high"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#050814]/70 via-[#050814]/10 to-transparent" />
+            </div>
           </motion.div>
         </motion.div>
       </div>
