@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        display: ["Sora", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
       },
       keyframes: {
         fadeIn: {

@@ -63,4 +63,55 @@ body {
     opacity: 1;
     animation: ripple 0.9s ease-out;
   }
+
+  .hero-title-underline {
+    @apply h-1.5 rounded-full;
+    width: min(12rem, 42vw);
+    background: linear-gradient(90deg, rgba(45, 123, 255, 0.2), rgba(52, 231, 255, 0.95), rgba(142, 91, 255, 0.95), rgba(45, 123, 255, 0.2));
+    background-size: 200% 100%;
+    box-shadow: 0 0 26px rgba(52, 231, 255, 0.28);
+    animation: shimmer 3.2s linear infinite;
+  }
+
+  .hero-primary-button {
+    @apply inline-flex items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold text-white transition duration-300;
+    background: linear-gradient(135deg, #2d7bff 0%, #8e5bff 100%);
+    box-shadow: 0 18px 40px -20px rgba(45, 123, 255, 0.85);
+  }
+
+  .hero-primary-button:hover,
+  .hero-primary-button:focus-visible {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 24px 50px -22px rgba(45, 123, 255, 0.95);
+  }
+
+  .hero-secondary-button {
+    @apply inline-flex items-center justify-center rounded-full border px-7 py-3.5 text-sm font-semibold text-white transition duration-300;
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 16px 38px -28px rgba(0, 0, 0, 0.95);
+  }
+
+  .hero-secondary-button:hover,
+  .hero-secondary-button:focus-visible {
+    transform: translateY(-2px) scale(1.02);
+    border-color: rgba(52, 231, 255, 0.45);
+    background: rgba(45, 123, 255, 0.08);
+    box-shadow: 0 20px 44px -26px rgba(52, 231, 255, 0.45);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title-underline {
+    width: min(9rem, 48vw);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }

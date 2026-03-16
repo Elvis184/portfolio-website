@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-black/20 py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-4 text-sm text-slate-300 sm:px-6 lg:flex-row lg:px-8">
         <div className="text-center lg:text-left">
-          <p className="text-slate-200">&copy; {new Date().getFullYear()} Elvis Carter.</p>
+          <p className="text-slate-200">&copy; {new Date().getFullYear()} ELVION TECH.</p>
           <p className="mt-1">Built with passion and modern web technologies.</p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4">
