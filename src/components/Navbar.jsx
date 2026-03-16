@@ -47,9 +47,18 @@ export default function Navbar({ activeSection }) {
         <div className="flex items-center justify-between">
           <button
             onClick={() => jumpTo("hero")}
-            className="font-display text-lg font-semibold tracking-wide text-white"
+            className="group inline-flex min-h-11 min-w-11 items-center rounded-xl p-1 transition duration-300 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+            aria-label="ELVION TECH home"
           >
-            ELVION<span className="text-electric">.tech</span>
+            <img
+              src="/images/logo.png"
+              alt="ELVION TECH logo"
+              width="56"
+              height="56"
+              decoding="async"
+              fetchPriority="high"
+              className="h-12 w-12 rounded-full border border-electric/45 object-cover shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_0_30px_rgba(45,123,255,0.35)] sm:h-14 sm:w-14"
+            />
           </button>
 
           <nav className="hidden items-center gap-2 lg:flex">
@@ -57,10 +66,10 @@ export default function Navbar({ activeSection }) {
               <button
                 key={item.id}
                 onClick={() => jumpTo(item.id)}
-                className={`rounded-xl px-3 py-2 text-sm transition ${
+                className={`min-h-11 rounded-xl px-3 py-2 text-sm transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${
                   activeSection === item.id
                     ? "bg-electric/20 text-white"
-                    : "text-slate-300 hover:bg-white/10 hover:text-white"
+                    : "text-slate-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {item.label}
@@ -71,7 +80,7 @@ export default function Navbar({ activeSection }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setOpen((state) => !state)}
-              className="rounded-xl border border-white/20 bg-white/5 p-2 text-slate-100 lg:hidden"
+              className="min-h-11 min-w-11 rounded-xl border border-white/20 bg-white/5 p-2 text-slate-100 transition duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy lg:hidden"
               aria-label="Open mobile menu"
             >
               {open ? <X size={17} /> : <Menu size={17} />}
@@ -85,7 +94,7 @@ export default function Navbar({ activeSection }) {
               <button
                 key={item.id}
                 onClick={() => jumpTo(item.id)}
-                className={`block w-full rounded-lg px-3 py-2 text-left text-sm transition ${
+                className={`block min-h-11 w-full rounded-lg px-3 py-2 text-left text-sm transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${
                   activeSection === item.id
                     ? "bg-electric/20 text-white"
                     : "text-slate-300 hover:bg-white/10 hover:text-white"
